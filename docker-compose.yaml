@@ -1,0 +1,57 @@
+version: '3.9'
+
+services:
+  audit-protocol:
+    image: ghcr.io/powerloom/test-ap:latest
+    expose:
+      - 9000
+      - 9002
+    ports:
+      - 9000:9000
+      - 9002:9002
+
+    depends_on:
+      - "redis"
+      - "rabbitmq"
+    #  - "ipfs"
+
+    links:
+    #  - "ipfs"
+      - "redis"
+      - "rabbitmq"
+
+    command:
+      bash -c "docker/run_services.sh &&
+      supervisord -n -c /etc/supervisord.conf -l log_test"
+
+  pooler:
+    image: ghcr.io/powerloom/test-pl:latest
+    depends_on:
+      - "audit-protocol"
+    expose:
+      - 8002
+    ports:
+      - 8002:8002
+    command:
+      bash -c "sh init_processes.sh"
+  redis:
+    command: ["redis-server"]
+    image: "redis"
+    expose:
+      - 6379
+    ports:
+      - 6379:6379
+  rabbitmq:
+    image: rabbitmq:3-management
+    #command: ["daemon"]
+    expose:
+      - 15672
+      - 5672
+    ports:
+      - 5672:5672
+      - 15672:15672
+  #ipfs:
+  #  image: ipfs/go-ipfs:release
+  #  command: ["daemon", "--migrate=true", #"--enable-pubsub-experiment"]
+  #  ports:
+  #    - 5001:5001
