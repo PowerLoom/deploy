@@ -6,9 +6,11 @@ services:
     expose:
       - 9000
       - 9002
+      - 9030
     ports:
       - 9000:9000
       - 9002:9002
+      - 9030:9030
 
     depends_on:
       - "redis"
@@ -19,9 +21,13 @@ services:
     #  - "ipfs"
       - "redis"
       - "rabbitmq"
+    environment:
+      - RPC_URL=$RPC_URL
+      - UUID=$UUID
+      - WEB3_STORAGE_TOKEN=$WEB3_STORAGE_TOKEN
 
     command:
-      bash -c "docker/run_services.sh &&
+      bash -c "sh snapshotter_autofill.sh && docker/run_services.sh &&
       supervisord -n -c /etc/supervisord.conf -l log_test"
 
   pooler:
@@ -32,8 +38,11 @@ services:
       - 8002
     ports:
       - 8002:8002
+    environment:
+      - RPC_URL=$RPC_URL
+      - UUID=$UUID
     command:
-      bash -c "sh init_processes.sh"
+      bash -c "sh snapshotter_autofill.sh && sh init_processes.sh"
   redis:
     command: ["redis-server"]
     image: "redis"

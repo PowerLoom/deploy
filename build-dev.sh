@@ -1,1 +1,1 @@
-docker-compose -f docker-compose-dev.yaml up -V
+docker-compose -f docker-compose-dev.yaml up -V --abort-on-container-exit

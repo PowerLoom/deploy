@@ -1,7 +1,7 @@
 # PowerLoom Deployment
 Scripts to deploy PowerLoom services (`audit-protocol` and `pooler`) to off chain consensus.
 
-_Note: Access by invitation only for now - please reach out to swaroop@powerloom.io_
+_Note: Access by invitation only for now - please reach out to snapshotters@powerloom.io_
 
 ## Requirements
 
@@ -13,16 +13,24 @@ _Note: Access by invitation only for now - please reach out to swaroop@powerloom
     - [Alchemy](https://alchemy.com/?r=15ce6db6d0a109d5) (preferred) __$49/mo__
     - [Infura](https://infura.io) _~$100/mo_ but requires __$225/mo__ plan
     - [Quicknode](https://www.quicknode.com?tap_a=67226-09396e&tap_s=3491854-f4a458) __$299/mo__
-    - BlockVigil (reach out to Swaroop to request a _free_ plan)
+    - BlockVigil (reach out to us to request a _free_ plan)
 
 ## For snapshotters
 
-Run the following command and follow instructions
+1. Copy `env.example to .env` and ensure `RPC_URL` and `UUID` is filled
+
+2. Run the following command and follow instructions
 
      ./build.sh
 
 ## For code contributors
 
-1. Ensure settings and static files are populated on both directories (`../audit-protocol-private` and `../fpmm-pooler-internal`) and then run the following
+1. Ensure settings and static files are populated on both directories (`../audit-protocol-private` and `../fpmm-pooler-internal`)
 
-2. `./build-dev.sh`
+2. Run the following command:
+
+     ./build-dev.sh
+
+## Questions?
+1. Ask on our [Discord](https://discord.com/channels/777248105636560948/1063022869040353300)
+2. Create an [issue](https://github.com/PowerLoom/deploy/issues/new) 
