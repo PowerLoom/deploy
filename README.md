@@ -17,9 +17,17 @@ _Note: Access by invitation only for now - please reach out to snapshotters@powe
 
 ## For snapshotters
 
-1. Copy `env.example to .env` and ensure `RPC_URL` and `UUID` is filled
+1. Copy `env.example to .env` and ensure `RPC_URL` and `UUID` is filled.
 
-2. Run the following command and follow instructions
+2. Setup docker to login with your Github:
+
+    - Get your Github personal access token [(classic)](https://github.com/settings/tokens/new). We recommend only giving the `read:packages` permission so this token cannot be abused.
+
+    - Set it in your environment: `export CR_PAT='<personal access token here>'`
+
+    - Login to docker using it: ` echo $CR_PAT | docker login ghcr.io -u USERNAME --password-stdin`
+
+3. Run the following command and follow instructions
 
      ./build.sh
 
