@@ -16,7 +16,8 @@ services:
       - "redis"
       - "rabbitmq"
     #  - "ipfs"
-
+    volumes:
+      - local_cache:/home/ubuntu/local_cache/
     links:
     #  - "ipfs"
       - "redis"
@@ -64,3 +65,5 @@ services:
   #  command: ["daemon", "--migrate=true", #"--enable-pubsub-experiment"]
   #  ports:
   #    - 5001:5001
+volumes:
+  local_cache:
