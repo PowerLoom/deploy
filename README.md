@@ -31,6 +31,14 @@ _Note: Access by invitation only for now - please reach out to snapshotters@powe
 
      ./build.sh
 
+4. Once all the services are up and running, the front-end can be accessed via [Pooler Frontend](http://localhost:3000) to see a UNISWAPV2 summary data dashboard similar to [PowerLoom UNISWAPV2 Prod](https://uniswapv2.powerloom.io/).
+    - A sample screenshot of the dashboard is given [here](./sample_images/pooler-frontend.jpg)
+
+    - This will also give an idea in case your snapshotting has fallen behind as you can notice from the time of last snapshot shown in the screenshot.
+
+    - Note that the data shown in your own dashboard will not be same as PowerLoom UNISWAPV2 prod as the number of pair cotracts that are being snapshotted is limited to 20 for the current release.
+
+
 ## For code contributors
 
 1. Ensure settings and static files are populated on both directories (`../audit-protocol-private` and `../fpmm-pooler-internal`)
@@ -41,4 +49,4 @@ _Note: Access by invitation only for now - please reach out to snapshotters@powe
 
 ## Questions?
 1. Ask on our [Discord](https://discord.com/channels/777248105636560948/1063022869040353300)
-2. Create an [issue](https://github.com/PowerLoom/deploy/issues/new) 
+2. Create an [issue](https://github.com/PowerLoom/deploy/issues/new)
