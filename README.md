@@ -17,7 +17,7 @@ _Note: Access by invitation only for now - please reach out to snapshotters@powe
 
 ## For snapshotters
 
-1. Copy `env.example to .env` and ensure `RPC_URL` and `UUID` is filled.
+1. Copy `env.example to .env` and ensure `RPC_URL` and `UUID` is filled. Optionally, you may also set `WEB3_STORAGE_TOKEN` which can be generated/retreived from your [API tokens page](https://web3.storage/tokens/?create=true) after signing for a free plan at web3.storage.
 
 2. Setup docker to login with your Github:
 
