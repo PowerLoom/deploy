@@ -8,7 +8,7 @@ _Note: Access by invitation only for now - please reach out to snapshotters@powe
 1. Latest version of `docker` and `docker-compose`
 2. IPFS daemon (locally or remote instance with API port `5001` tunneled to localhost).
     - While you can run this within docker, we've noticed issues with running on a single system.
-    - Regardless, IPFS can hog a lot of resoures - not recommended to run the default setup on a personal computer.
+    - Regardless, IPFS can hog __*a lot*__ of resources - it is not recommended to run the default setup on a personal computer.
 3. RPC URL for Ethereum mainnet. We recommend running a full geth node to save costs but for this phase, any of the following should suffice.
     - [Alchemy](https://alchemy.com/?r=15ce6db6d0a109d5) (preferred) __$49/mo__
     - [Infura](https://infura.io) _~$100/mo_ but requires __$225/mo__ plan
@@ -29,7 +29,7 @@ _Note: Access by invitation only for now - please reach out to snapshotters@powe
 
 3. Run the following command and follow instructions
 
-     ./build.sh
+    `./build.sh`
 
 4. Once all the services are up and running, the front-end can be accessed via [Pooler Frontend](http://localhost:3000) to see a UNISWAPV2 summary data dashboard similar to [PowerLoom UNISWAPV2 Prod](https://uniswapv2.powerloom.io/).
     - A sample screenshot of the dashboard is given [here](./sample_images/pooler-frontend.jpg)
@@ -38,14 +38,19 @@ _Note: Access by invitation only for now - please reach out to snapshotters@powe
 
     - Note that the data shown in your own dashboard will not be same as PowerLoom UNISWAPV2 prod as the number of pair cotracts that are being snapshotted is limited to 20 for the current release.
 
+5. We have setup a bare-bones consensus dashboard at: [offchain-consensus.powerloom.io](https://offchain-consensus.powerloom.io/)
 
-## For code contributors
+6. To shutdown services, just press `Ctrl+C` (and again to force).
 
-1. Ensure settings and static files are populated on both directories (`../audit-protocol-private` and `../fpmm-pooler-internal`)
+    > If you don't keep services running for extended periods of time, this will affect consensus and we may be forced to de-activate your snapshotter UUID.
+
+## Instructions for code contributors
+
+1. Ensure settings and static files are populated on both directories (`../audit-protocol-private` and `../fpmm-pooler-internal`) and `../pooler-frontend` exists.
 
 2. Run the following command:
 
-     ./build-dev.sh
+    `./build-dev.sh`
 
 ## Questions?
 1. Ask on our [Discord](https://discord.com/channels/777248105636560948/1063022869040353300)
