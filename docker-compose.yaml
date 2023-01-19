@@ -1,0 +1,78 @@
+version: '3.9'
+
+services:
+  audit-protocol:
+    image: ghcr.io/powerloom/audit-protocol:latest
+    expose:
+      - 9000
+      - 9002
+      - 9030
+    ports:
+      - 9000:9000
+      - 9002:9002
+      - 9030:9030
+
+    depends_on:
+      - "redis"
+      - "rabbitmq"
+    #  - "ipfs"
+    volumes:
+      - local_cache:/home/ubuntu/local_cache/
+    links:
+    #  - "ipfs"
+      - "redis"
+      - "rabbitmq"
+    environment:
+      - RPC_URL=$RPC_URL
+      - UUID=$UUID
+      - WEB3_STORAGE_TOKEN=$WEB3_STORAGE_TOKEN
+
+    command:
+      bash -c "sh snapshotter_autofill.sh && sh init_processes.sh"
+
+  pooler:
+    image: ghcr.io/powerloom/pooler:latest
+    depends_on:
+      - "audit-protocol"
+    expose:
+      - 8002
+    ports:
+      - 8002:8002
+    environment:
+      - RPC_URL=$RPC_URL
+      - UUID=$UUID
+    command:
+      bash -c "sh snapshotter_autofill.sh && sh init_processes.sh"
+
+  pooler-frontend:
+    image: ghcr.io/powerloom/pooler-frontend:latest
+    depends_on:
+     - "pooler"
+    expose:
+      - 3000
+    ports:
+      - 3000:3000
+
+  redis:
+    command: ["redis-server"]
+    image: "redis"
+    expose:
+      - 6379
+    ports:
+      - 6379:6379
+  rabbitmq:
+    image: rabbitmq:3-management
+    #command: ["daemon"]
+    expose:
+      - 15672
+      - 5672
+    ports:
+      - 5672:5672
+      - 15672:15672
+  #ipfs:
+  #  image: ipfs/go-ipfs:release
+  #  command: ["daemon", "--migrate=true", #"--enable-pubsub-experiment"]
+  #  ports:
+  #    - 5001:5001
+volumes:
+  local_cache:
