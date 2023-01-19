@@ -31,8 +31,7 @@ services:
       - WEB3_STORAGE_TOKEN=$WEB3_STORAGE_TOKEN
 
     command:
-      bash -c "docker/run_services.sh &&
-      supervisord -n -c /etc/supervisord.conf -l log_test"
+      bash -c "sh init_processes.sh"
 
   pooler:
     image: powerloom-pooler
@@ -52,7 +51,10 @@ services:
       bash -c "sh init_processes.sh"
 
   pooler-frontend:
-    image: pooler-frontend
+    image: powerloom-pooler-frontend
+    #build:
+    #  context:
+    #    ../pooler-frontend/
     depends_on:
      - "pooler"
     expose:

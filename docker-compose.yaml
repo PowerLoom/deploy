@@ -28,8 +28,7 @@ services:
       - WEB3_STORAGE_TOKEN=$WEB3_STORAGE_TOKEN
 
     command:
-      bash -c "sh snapshotter_autofill.sh && docker/run_services.sh &&
-      supervisord -n -c /etc/supervisord.conf -l log_test"
+      bash -c "sh snapshotter_autofill.sh && sh init_processes.sh"
 
   pooler:
     image: ghcr.io/powerloom/test-pl:latest
