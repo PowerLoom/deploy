@@ -9,6 +9,7 @@ _Note: Access by invitation only for now - please reach out to snapshotters@powe
 2. IPFS daemon (locally or remote instance with API port `5001` tunneled to localhost).
     - While you can run this within docker, we've noticed issues with running on a single system.
     - Regardless, IPFS can hog __*a lot*__ of resources - it is not recommended to run the default setup on a personal computer.
+> 3rd party IPFS services such as Pinata/Infura are not supported
 3. RPC URL for Ethereum mainnet. We recommend running a full geth node to save costs but for this phase, any of the following should suffice.
     - [Alchemy](https://alchemy.com/?r=15ce6db6d0a109d5) (preferred) __$49/mo__
     - [Infura](https://infura.io) _~$100/mo_ but requires __$225/mo__ plan
