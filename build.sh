@@ -1,3 +1,5 @@
+#!/bin/bash
+
 source .env
 
 echo "testing before build...";
@@ -24,4 +26,11 @@ fi
 
 echo "building...";
 
-docker-compose up -V --abort-on-container-exit
+if ! [ -x "$(command -v docker-compose)" ]; then
+    echo 'docker compose not found, trying to see if compose exists within docker';
+    docker compose pull;
+    docker compose up -V --abort-on-container-exit
+else
+    docker-compose pull;
+    docker-compose up -V --abort-on-container-exit
+fi
