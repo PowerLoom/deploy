@@ -1,3 +1,5 @@
+#!/bin/bash
+
 source .env
 
 echo "testing before build...";
@@ -18,6 +20,17 @@ echo "Found UUID ${UUID}";
 
 echo "WEB3_STORAGE_TOKEN ${WEB3_STORAGE_TOKEN}";
 
+if [ "$CONSENSUS_URL" ]; then
+    echo "Found CONSENSUS_URL ${CONSENSUS_URL}";
+fi
+
 echo "building...";
 
-docker-compose up -V --abort-on-container-exit
+if ! [ -x "$(command -v docker-compose)" ]; then
+    echo 'docker compose not found, trying to see if compose exists within docker';
+    docker compose pull;
+    docker compose up -V --abort-on-container-exit
+else
+    docker-compose pull;
+    docker-compose up -V --abort-on-container-exit
+fi

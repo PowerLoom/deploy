@@ -26,7 +26,7 @@ services:
       - RPC_URL=$RPC_URL
       - UUID=$UUID
       - WEB3_STORAGE_TOKEN=$WEB3_STORAGE_TOKEN
-
+      - CONSENSUS_URL=$CONSENSUS_URL
     command:
       bash -c "sh snapshotter_autofill.sh && sh init_processes.sh"
 
@@ -41,6 +41,7 @@ services:
     environment:
       - RPC_URL=$RPC_URL
       - UUID=$UUID
+      - CONSENSUS_URL=$CONSENSUS_URL
     command:
       bash -c "sh snapshotter_autofill.sh && sh init_processes.sh"
 
