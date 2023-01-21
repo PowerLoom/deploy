@@ -18,6 +18,10 @@ echo "Found UUID ${UUID}";
 
 echo "WEB3_STORAGE_TOKEN ${WEB3_STORAGE_TOKEN}";
 
+if [ "$CONSENSUS_URL" ]; then
+    echo "Found CONSENSUS_URL ${CONSENSUS_URL}";
+fi
+
 echo "building...";
 
 docker-compose up -V --abort-on-container-exit

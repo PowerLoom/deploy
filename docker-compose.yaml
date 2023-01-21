@@ -2,7 +2,7 @@ version: '3.9'
 
 services:
   audit-protocol:
-    image: ghcr.io/powerloom/audit-protocol:latest
+    image: ghcr.io/powerloom/audit-protocol:dockerify
     expose:
       - 9000
       - 9002
@@ -26,12 +26,12 @@ services:
       - RPC_URL=$RPC_URL
       - UUID=$UUID
       - WEB3_STORAGE_TOKEN=$WEB3_STORAGE_TOKEN
-
+      - CONSENSUS_URL=$CONSENSUS_URL
     command:
       bash -c "sh snapshotter_autofill.sh && sh init_processes.sh"
 
   pooler:
-    image: ghcr.io/powerloom/pooler:latest
+    image: ghcr.io/powerloom/pooler:dockerify
     depends_on:
       - "audit-protocol"
     expose:
@@ -41,11 +41,12 @@ services:
     environment:
       - RPC_URL=$RPC_URL
       - UUID=$UUID
+      - CONSENSUS_URL=$CONSENSUS_URL
     command:
       bash -c "sh snapshotter_autofill.sh && sh init_processes.sh"
 
   pooler-frontend:
-    image: ghcr.io/powerloom/pooler-frontend:latest
+    image: ghcr.io/powerloom/pooler-frontend:dockerify
     depends_on:
      - "pooler"
     expose:
