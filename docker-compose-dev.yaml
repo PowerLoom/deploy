@@ -35,7 +35,7 @@ services:
       - WEB3_STORAGE_TOKEN=$WEB3_STORAGE_TOKEN
       - CONSENSUS_URL=$CONSENSUS_URL
     healthcheck:
-      test: ["CMD", "wget", "http://localhost:9000/projects/updates"]
+      test: ["CMD", "curl", "-f", "http://localhost:9000/health"]
       interval: 30s
       timeout: 10s
       retries: 5
@@ -64,7 +64,7 @@ services:
       - UUID=$UUID
       - CONSENSUS_URL=$CONSENSUS_URL
     healthcheck:
-      test: ["CMD", "wget", "http://localhost:8002/v2-pairs"]
+      test: ["CMD", "curl", "-f", "http://localhost:8002/health"]
       interval: 30s
       timeout: 10s
       retries: 5
@@ -85,7 +85,7 @@ services:
     ports:
       - 3000:3000
     healthcheck:
-      test: ["CMD", "wget", "http://localhost:3000"]
+      test: ["CMD", "wget", "-qO-", "http://localhost:3000"]
       interval: 30s
       timeout: 10s
       retries: 5
