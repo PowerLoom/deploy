@@ -14,10 +14,14 @@ services:
       - 9000:9000
       - 9002:9002
       - 9030:9030
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
 
     depends_on:
-      - "redis"
-      - "rabbitmq"
+      redis:
+         condition: service_healthy
+      rabbitmq:
+         condition: service_healthy
     #  - "ipfs"
     volumes:
       - local_cache:/home/ubuntu/local_cache/
@@ -30,6 +34,13 @@ services:
       - UUID=$UUID
       - WEB3_STORAGE_TOKEN=$WEB3_STORAGE_TOKEN
       - CONSENSUS_URL=$CONSENSUS_URL
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 40s
+
     command:
       bash -c "sh init_processes.sh"
 
@@ -39,15 +50,25 @@ services:
     #  context:
     #    ../fpmm-pooler-internal/
     depends_on:
-      - "audit-protocol"
+      audit-protocol:
+        condition: service_healthy
     expose:
       - 8002
     ports:
       - 8002:8002
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
     environment:
       - RPC_URL=$RPC_URL
       - UUID=$UUID
       - CONSENSUS_URL=$CONSENSUS_URL
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8002/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
     command:
       bash -c "sh init_processes.sh"
 
@@ -57,11 +78,18 @@ services:
     #  context:
     #    ../pooler-frontend/
     depends_on:
-     - "pooler"
+      pooler:
+        condition: service_healthy
     expose:
       - 3000
     ports:
       - 3000:3000
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:3000"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
 
   redis:
     command: ["redis-server"]
@@ -70,6 +98,13 @@ services:
       - 6379
     ports:
       - 6379:6379
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+
   rabbitmq:
     image: rabbitmq:3-management
     #command: ["daemon"]
@@ -79,6 +114,12 @@ services:
     ports:
       - 5672:5672
       - 15672:15672
+    healthcheck:
+      test: rabbitmq-diagnostics check_port_connectivity
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
   #ipfs:
   #  image: ipfs/go-ipfs:release
   #  command: ["daemon", "--migrate=true", #"--enable-pubsub-experiment"]
