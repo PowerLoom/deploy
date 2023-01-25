@@ -29,7 +29,7 @@ _Note: Access by invitation only for now - please reach out to snapshotters@powe
 
     - Login to docker using it: ` echo $CR_PAT | docker login ghcr.io -u USERNAME --password-stdin`
 
-3. Run the following command and follow instructions
+3. Run the following command (ideally in a `screen`) and follow instructions
 
     `./build.sh`
 
@@ -45,6 +45,10 @@ _Note: Access by invitation only for now - please reach out to snapshotters@powe
 6. To shutdown services, just press `Ctrl+C` (and again to force).
 
     > If you don't keep services running for extended periods of time, this will affect consensus and we may be forced to de-activate your snapshotter UUID.
+    
+7. If you see issues with data, you can do a clean *reset* by running the following command before restarting step 3:
+
+    `docker-compose down --volumes`
 
 ## Instructions for code contributors
 
