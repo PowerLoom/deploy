@@ -6,9 +6,10 @@ _Note: Access by invitation only for now - please reach out to snapshotters@powe
 ## Requirements
 
 1. Latest version of `docker` and `docker-compose`
+2. At least 4 core CPU, 8GB RAM and 50GB SSD.
 2. IPFS daemon (locally or remote instance with API port `5001` tunneled to localhost).
-    - While you can run this within docker, we've noticed issues with running on a single system.
-    - Regardless, IPFS can hog __*a lot*__ of resources - it is not recommended to run the default setup on a personal computer.
+    - While we have __included__ this in our autobuild docker setup, we've noticed issues on non-server setups.
+    - Regardless, IPFS can hog __*a lot*__ of resources - it is not recommended to run this on a personal computer.
 > 3rd party IPFS services such as Pinata/Infura are not supported
 3. RPC URL for Ethereum mainnet. We recommend running a full geth node to save costs but for this phase, any of the following should suffice.
     - [Alchemy](https://alchemy.com/?r=15ce6db6d0a109d5) (preferred) __$49/mo__
