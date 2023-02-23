@@ -1,7 +1,7 @@
 # PowerLoom Deployment
 Scripts to deploy PowerLoom services (`audit-protocol` and `pooler`) to off chain consensus.
 
-_Note: Access by invitation only for now - please reach out to snapshotters@powerloom.io_
+> Note: In this private alpha, you need a UUID from us to participate in the consensus. Please [fill this form](https://powerloom.io/consensus-invite) to request access.
 
 ## Requirements
 
@@ -9,7 +9,7 @@ _Note: Access by invitation only for now - please reach out to snapshotters@powe
 2. At least 4 core CPU, 8GB RAM and 50GB SSD.
 2. IPFS daemon (locally or remote instance with API port `5001` tunneled to localhost).
     - While we have __included__ this in our autobuild docker setup, we've noticed issues on non-server setups.
-    - Regardless, IPFS daemon can hog __*a lot*__ of resources - it is not recommended to run this on a personal computer.
+    - Regardless, IPFS daemon can hog __*a lot*__ of resources - it is not recommended to run this on a personal computer unless you have a strong internet connection and dedicated CPU+RAM.
 > 3rd party IPFS services such as Pinata/Infura are not supported
 3. RPC URL for Ethereum mainnet. We recommend running a full geth node to save costs but for this phase, any of the following should suffice.
     - [Alchemy](https://alchemy.com/?r=15ce6db6d0a109d5) (preferred) __$49/mo__
