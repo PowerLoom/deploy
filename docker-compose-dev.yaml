@@ -9,11 +9,11 @@ services:
     expose:
       - 9000
       - 9002
-      - 9030
+    #  - 9030
     ports:
       - 9000:9000
       - 9002:9002
-      - 9030:9030
+    #  - 9030:9030
     extra_hosts:
       - "host.docker.internal:host-gateway"
 
@@ -86,6 +86,32 @@ services:
       - 3000:3000
     healthcheck:
       test: ["CMD", "wget", "-qO-", "http://localhost:3000"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
+
+  offchain-consensus:
+    image: powerloom-offchain-consensus
+    profiles: ["consensus"]
+    expose:
+      - 9030
+    ports:
+      - 9030:9030
+    environment:
+      - UUID=$UUID
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  offchainconsensus-frontend:
+    image: powerloom-offchainconsensus-frontend
+    profiles: ["consensus"]
+    expose:
+      - 4173
+    ports:
+      - 4173:4173
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:4173"]
       interval: 10s
       timeout: 5s
       retries: 3
