@@ -12,7 +12,7 @@ Scripts to deploy PowerLoom services (`audit-protocol` and `pooler`) to off chai
     - Regardless, IPFS daemon can hog __*a lot*__ of resources - it is not recommended to run this on a personal computer unless you have a strong internet connection and dedicated CPU+RAM.
     - _3rd party IPFS services such as Pinata/Infura are not supported_
 4. RPC URL for Ethereum mainnet. We recommend running a full geth node to save costs but for this phase, any of the following should suffice.
-    - [Alchemy](https://alchemy.com/?r=15ce6db6d0a109d5) (preferred) __$49/mo__
+    - [Alchemy](https://alchemy.com/?r=15ce6db6d0a109d5) _~$400/mo_ but the Growth plan at __$49/mo__ includes 300mcu which handles much of our current usage.
     - [Infura](https://infura.io) _~$100/mo_ but requires __$225/mo__ plan
     - [Quicknode](https://www.quicknode.com?tap_a=67226-09396e&tap_s=3491854-f4a458) __$299/mo__
     - BlockVigil (reach out to us to arrange for a special plan though them)
@@ -33,7 +33,7 @@ Scripts to deploy PowerLoom services (`audit-protocol` and `pooler`) to off chai
 
     - This will also give an idea in case your snapshotting has fallen behind as you can notice from the time of last snapshot shown in the screenshot.
 
-    - Note that the data shown in your own dashboard will not be same as PowerLoom UNISWAPV2 prod as the number of pair cotracts that are being snapshotted is limited to 20 for the current release.
+    - Note that the data shown in your own dashboard will not be same as production UI on PowerLoom.io as the number of pair cotracts that are being snapshotted is limited to 20 for the current release.
 
 4. We have setup a bare-bones consensus dashboard at: [offchain-consensus.powerloom.io](https://offchain-consensus.powerloom.io/)
 
@@ -47,12 +47,16 @@ Scripts to deploy PowerLoom services (`audit-protocol` and `pooler`) to off chai
 
 ## Instructions for code contributors
 
-1. Ensure settings and static files are populated on both directories (`../audit-protocol` and `../pooler`) and `../pooler-frontend` exists.
+1. Ensure settings and static files are populated in relevant directories
+    - `../audit-protocol`
+    - `../pooler`
+    - `../offchain-consensus` (if used)
+    - others such as `../pooler-frontend` and `../ap-consensus-dashboard` will work by default but do require the latest code to be cloned in the parent directory. Refer to script below.
 
 2. Run the following command:
 
     `./build-dev.sh`
 
 ## Questions?
-1. Ask on our [Discord](https://discord.com/channels/777248105636560948/1063022869040353300)
+1. Ask on our [Discord](https://discord.com/channels/777248105636560948/1063022869040353300) - if you don't see the channel, ask an admin to add the snapshotter `role` to your account.
 2. Create an [issue](https://github.com/PowerLoom/deploy/issues/new)
