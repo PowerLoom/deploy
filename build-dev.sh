@@ -1,9 +1,24 @@
-#Temporary steps until we can fix the caching issue in build context #FIXME
+#Make sure the repos mentioned in comments are cloned in the parent directory of this repo
 
-cd ../audit-protocol-private/ && ./build-docker.sh;
-cd ../fpmm-pooler-internal/ && ./build-docker.sh;
+#cd ../ && git clone https://github.com/PowerLoom/audit-protocol.git;
+cd ../audit-protocol/ && ./build-docker.sh;
+
+#cd ../ && git clone https://github.com/PowerLoom/pooler.git;
+cd ../pooler/ && ./build-docker.sh;
+
+#cd ../ && git clone https://github.com/PowerLoom/pooler-frontend.git;
 cd ../pooler-frontend/ && ./build-docker.sh;
+
+#cd ../ && git clone https://github.com/PowerLoom/offchain-consensus.git;
+cd ../offchain-consensus/ && ./build-docker.sh;
+
+#cd ../ && git clone https://github.com/PowerLoom/ap-consensus-dashboard.git;
+cd ../ap-consensus-dashboard/ && ./build-docker.sh;
+
 cd ../deploy;
 
-docker-compose -f docker-compose-dev.yaml up -V --abort-on-container-exit
-#docker-compose -f docker-compose-dev.yaml --profile ipfs up -V --abort-on-container-exit
+#docker-compose -f docker-compose-dev.yaml up -V --abort-on-container-exit
+docker-compose -f docker-compose-dev.yaml --profile ipfs --profile consensus up -V --abort-on-container-exit
+
+#Reset command:
+#docker-compose -f docker-compose-dev.yaml --profile ipfs --profile consensus down --volumes
