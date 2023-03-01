@@ -1,7 +1,7 @@
 # PowerLoom Deployment
 Scripts to deploy PowerLoom services (`audit-protocol` and `pooler`) to off chain consensus.
 
-> Note: In this private alpha, you need a UUID from us to participate in the consensus. Please [fill this form](https://powerloom.io/consensus-invite) to request access.
+> Note: In this private alpha, you need a UUID from us to participate in the `hosted` consensus. Please [fill this form](https://powerloom.io/consensus-invite) to request access.
 
 ## Requirements
 
@@ -11,11 +11,8 @@ Scripts to deploy PowerLoom services (`audit-protocol` and `pooler`) to off chai
     - While we have __included__ this in our autobuild docker setup, we've noticed issues on non-server setups.
     - Regardless, IPFS daemon can hog __*a lot*__ of resources - it is not recommended to run this on a personal computer unless you have a strong internet connection and dedicated CPU+RAM.
     - _3rd party IPFS services such as Pinata/Infura are not supported_
-4. RPC URL for Ethereum mainnet. We recommend running a full geth node to save costs but for this phase, any of the following should suffice.
-    - [Alchemy](https://alchemy.com/?r=15ce6db6d0a109d5) _~$400/mo_ but the Growth plan at __$49/mo__ includes 300mcu which handles much of our current usage.
-    - [Infura](https://infura.io) _~$100/mo_ but requires __$225/mo__ plan
-    - [Quicknode](https://www.quicknode.com?tap_a=67226-09396e&tap_s=3491854-f4a458) __$299/mo__
-    - BlockVigil (reach out to us to arrange for a special plan though them)
+4. RPC URL for `Ethereum mainnet`. We recommend running a full geth node to save costs and to stick to ethos of decentralization :)
+> Our default (lite mode) setup is designed to work well with a free plan on any of the RPC providers like [Alchemy](https://alchemy.com/?r=15ce6db6d0a109d5), [Infura](https://infura.io), [Quicknode](https://www.quicknode.com?tap_a=67226-09396e&tap_s=3491854-f4a458), etc. It even works with Ankr's [public endpoint](https://rpc.ankr.com/eth) but we recommend signing up to track usage. For those interested in exploring the the full setup, we can also arrange for a special pan through our partners such as BlockVigil.
 
 ## For snapshotters
 
@@ -33,7 +30,7 @@ Scripts to deploy PowerLoom services (`audit-protocol` and `pooler`) to off chai
 
     - This will also give an idea in case your snapshotting has fallen behind as you can notice from the time of last snapshot shown in the screenshot.
 
-    - Note that the data shown in your own dashboard will not be same as production UI on PowerLoom.io as the number of pair cotracts that are being snapshotted is limited to 20 for the current release.
+    - Note that the data shown in your own dashboard will not be same as production UI on PowerLoom.io as the "lite mode" is only set to snapshot 7 pair contracts. Refer to contributors section below to enable all pairs.
 
 4. We have setup a bare-bones consensus dashboard at: [offchain-consensus.powerloom.io](https://offchain-consensus.powerloom.io/)
 
@@ -47,7 +44,7 @@ Scripts to deploy PowerLoom services (`audit-protocol` and `pooler`) to off chai
 
 ## Instructions for code contributors
 
-1. Ensure settings and static files are populated in relevant directories
+1. Ensure `settings.json` and `static/cached_pair_addresses.json` files are populated in relevant directories
     - `../audit-protocol`
     - `../pooler`
     - `../offchain-consensus` (if used)
