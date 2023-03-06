@@ -6,7 +6,7 @@ Scripts to deploy PowerLoom services (`audit-protocol` and `pooler`) to [offchai
 ## Requirements
 
 1. Latest version of `docker` (`>= 20.10.21`) and `docker-compose` (`>= v2.13.0`)
-2. At least 4 core CPU, 8GB RAM and 50GB SSD - make sure to chose the correct spec when deploying to Github Codespaces.
+2. At least 4 core CPU, 8GB RAM and 50GB SSD - make sure to choose the correct spec when deploying to Github Codespaces.
 3. IPFS daemon (locally or remote instance with API port `5001` tunneled to localhost).
     - While we have __included__ this in our autobuild docker setup, we've noticed issues on non-server setups.
     - Regardless, IPFS daemon can hog __*a lot*__ of resources - it is not recommended to run this on a personal computer unless you have a strong internet connection and dedicated CPU+RAM.
