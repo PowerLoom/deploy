@@ -1,12 +1,12 @@
 # PowerLoom Deployment
-Scripts to deploy PowerLoom services (`audit-protocol` and `pooler`) to off chain consensus.
+Scripts to deploy PowerLoom services (`audit-protocol` and `pooler`) to [offchain consensus](https://medium.com/powerloom/open-sesame-deb52685bacb).
 
 > Note: In this private alpha, you need a UUID from us to participate in the `hosted` consensus. Please [fill this form](https://powerloom.io/consensus-invite) to request access.
 
 ## Requirements
 
 1. Latest version of `docker` (`>= 20.10.21`) and `docker-compose` (`>= v2.13.0`)
-2. At least 4 core CPU, 8GB RAM and 50GB SSD.
+2. At least 4 core CPU, 8GB RAM and 50GB SSD - make sure to chose the correct spec when deploying to Github Codespaces.
 3. IPFS daemon (locally or remote instance with API port `5001` tunneled to localhost).
     - While we have __included__ this in our autobuild docker setup, we've noticed issues on non-server setups.
     - Regardless, IPFS daemon can hog __*a lot*__ of resources - it is not recommended to run this on a personal computer unless you have a strong internet connection and dedicated CPU+RAM.
