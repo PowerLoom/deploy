@@ -5,7 +5,7 @@ services:
     image: powerloom-audit-protocol
     #build:
     #  context:
-    #    ../audit-protocol-private/
+    #    ../audit-protocol/
     expose:
       - 9000
       - 9002
@@ -48,14 +48,16 @@ services:
     image: powerloom-pooler
     #build:
     #  context:
-    #    ../fpmm-pooler-internal/
+    #    ../pooler/
     depends_on:
       audit-protocol:
         condition: service_healthy
     expose:
       - 8002
+      - 8555
     ports:
       - 8002:8002
+      - 8555:8555
     extra_hosts:
       - "host.docker.internal:host-gateway"
 
@@ -93,6 +95,9 @@ services:
 
   offchain-consensus:
     image: powerloom-offchain-consensus
+    #build:
+    #  context:
+    #    ../offchain-consensus/
     profiles: ["consensus"]
     expose:
       - 9030
