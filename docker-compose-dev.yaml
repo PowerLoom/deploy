@@ -29,11 +29,6 @@ services:
     #  - "ipfs"
       - "redis"
       - "rabbitmq"
-    environment:
-      - RPC_URL=$RPC_URL
-      - UUID=$UUID
-      - WEB3_STORAGE_TOKEN=$WEB3_STORAGE_TOKEN
-      - CONSENSUS_URL=$CONSENSUS_URL
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:9000/health"]
       interval: 10s
@@ -60,11 +55,6 @@ services:
       - 8555:8555
     extra_hosts:
       - "host.docker.internal:host-gateway"
-
-    environment:
-      - RPC_URL=$RPC_URL
-      - UUID=$UUID
-      - CONSENSUS_URL=$CONSENSUS_URL
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8002/health"]
       interval: 10s
@@ -103,8 +93,6 @@ services:
       - 9030
     ports:
       - 9030:9030
-    environment:
-      - UUID=$UUID
     extra_hosts:
       - "host.docker.internal:host-gateway"
 
