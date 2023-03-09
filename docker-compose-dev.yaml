@@ -89,6 +89,9 @@ services:
     #  context:
     #    ../offchain-consensus/
     profiles: ["consensus"]
+    depends_on:
+      redis:
+         condition: service_healthy
     expose:
       - 9030
     ports:
