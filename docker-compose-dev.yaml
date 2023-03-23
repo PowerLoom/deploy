@@ -14,8 +14,6 @@ services:
       - 9000:9000
       - 9002:9002
     #  - 9030:9030
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
 
     depends_on:
       redis:
@@ -53,14 +51,14 @@ services:
     ports:
       - 8002:8002
       - 8555:8555
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8002/health"]
       interval: 10s
       timeout: 5s
       retries: 3
       start_period: 30s
+    volumes:
+      - ../pooler/pooler:/pooler
     command:
       bash -c "sh init_processes.sh"
 
@@ -96,8 +94,6 @@ services:
       - 9030
     ports:
       - 9030:9030
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
 
   offchainconsensus-frontend:
     image: powerloom-offchainconsensus-frontend
@@ -155,8 +151,6 @@ services:
       echo 'starting ipfs';
       /sbin/tini -- /usr/local/bin/start_ipfs daemon --migrate=true --agent-version-suffix=docker;
       "
-    #command:
-    #   ["daemon", "--migrate=true", "--agent-version-suffix=docker"]
     expose:
       - 5001
     ports:
