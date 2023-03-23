@@ -11,8 +11,6 @@ services:
       - 9000:9000
       - 9002:9002
       - 9030:9030
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
 
     depends_on:
       redis:
@@ -50,8 +48,6 @@ services:
       - 8002
     ports:
       - 8002:8002
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
     environment:
       - RPC_URL=$RPC_URL
       - UUID=$UUID
