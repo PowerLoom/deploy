@@ -22,7 +22,6 @@ services:
     #  - "ipfs"
     volumes:
       - local_cache:/home/ubuntu/local_cache/
-      - ../audit-protocol/:/src
     links:
     #  - "ipfs"
       - "redis"
