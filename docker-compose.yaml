@@ -11,9 +11,6 @@ services:
       - 9000:9000
       - 9002:9002
       - 9030:9030
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
-
     depends_on:
       redis:
          condition: service_healthy
@@ -40,7 +37,6 @@ services:
     command:
       bash -c "sh snapshotter_autofill.sh && sh init_processes.sh"
 
-
   pooler:
     image: ghcr.io/powerloom/pooler:latest
     depends_on:
@@ -50,8 +46,8 @@ services:
       - 8002
     ports:
       - 8002:8002
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
+    volumes:
+      - local_cache:/home/ubuntu/local_cache/
     environment:
       - RPC_URL=$RPC_URL
       - UUID=$UUID
@@ -111,16 +107,6 @@ services:
       start_period: 30s
   ipfs:
     image: ipfs/kubo:release
-    entrypoint: >
-      /bin/sh -c "
-      echo 'adding cronjob';
-      mkdir -p /var/spool/cron/crontabs;
-      croncmd=\"cd /data/ipfs && find . -type f -mtime +7 -name \\"*.data\\" | xargs rm -f 2>&1\";
-      cronjob=\"0 * * * * $$croncmd\";
-      ( crontab -l | grep -v -F \"$$croncmd\" ; echo \"$$cronjob\" ) | crontab -;
-      echo 'starting ipfs';
-      /sbin/tini -- /usr/local/bin/start_ipfs daemon --migrate=true --agent-version-suffix=docker;
-      "
     #command:
     #   ["daemon", "--migrate=true", "--agent-version-suffix=docker"]
     expose:

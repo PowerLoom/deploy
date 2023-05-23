@@ -9,9 +9,6 @@ cd ../pooler/ && ./build-docker.sh;
 #cd ../ && git clone https://github.com/PowerLoom/pooler-frontend.git;
 cd ../pooler-frontend/ && ./build-docker.sh;
 
-#cd ../ && git clone https://github.com/PowerLoom/offchain-consensus.git;
-cd ../offchain-consensus/ && ./build-docker.sh;
-
 #cd ../ && git clone https://github.com/PowerLoom/ap-consensus-dashboard.git;
 cd ../ap-consensus-dashboard/ && ./build-docker.sh;
 

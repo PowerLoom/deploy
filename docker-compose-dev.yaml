@@ -14,9 +14,6 @@ services:
       - 9000:9000
       - 9002:9002
     #  - 9030:9030
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
-
     depends_on:
       redis:
          condition: service_healthy
@@ -25,6 +22,7 @@ services:
     #  - "ipfs"
     volumes:
       - local_cache:/home/ubuntu/local_cache/
+      - ../audit-protocol/:/src
     links:
     #  - "ipfs"
       - "redis"
@@ -53,8 +51,10 @@ services:
     ports:
       - 8002:8002
       - 8555:8555
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
+    volumes:
+      - local_cache:/home/ubuntu/local_cache/
+      - ../pooler/pooler:/pooler
+      - ../pooler/config:/config
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8002/health"]
       interval: 10s
@@ -83,25 +83,8 @@ services:
       retries: 3
       start_period: 20s
 
-  offchain-consensus:
-    image: powerloom-offchain-consensus
-    #build:
-    #  context:
-    #    ../offchain-consensus/
-    profiles: ["consensus"]
-    depends_on:
-      redis:
-         condition: service_healthy
-    expose:
-      - 9030
-    ports:
-      - 9030:9030
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
-
   offchainconsensus-frontend:
     image: powerloom-offchainconsensus-frontend
-    profiles: ["consensus"]
     expose:
       - 4173
     ports:
@@ -145,16 +128,6 @@ services:
   ipfs:
     image: ipfs/kubo:release
     profiles: ["ipfs"]
-    entrypoint: >
-      /bin/sh -c "
-      echo 'adding cronjob';
-      mkdir -p /var/spool/cron/crontabs;
-      croncmd=\"cd /data/ipfs && find . -type f -mtime +7 -name \\"*.data\\" | xargs rm -f 2>&1\";
-      cronjob=\"0 * * * * $$croncmd\";
-      ( crontab -l | grep -v -F \"$$croncmd\" ; echo \"$$cronjob\" ) | crontab -;
-      echo 'starting ipfs';
-      /sbin/tini -- /usr/local/bin/start_ipfs daemon --migrate=true --agent-version-suffix=docker;
-      "
     #command:
     #   ["daemon", "--migrate=true", "--agent-version-suffix=docker"]
     expose:
