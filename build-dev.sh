@@ -15,7 +15,7 @@ cd ../ap-consensus-dashboard/ && ./build-docker.sh;
 cd ../deploy;
 
 #docker-compose -f docker-compose-dev.yaml up -V --abort-on-container-exit
-docker-compose -f docker-compose-dev.yaml --profile ipfs --profile consensus up -V --abort-on-container-exit
+docker-compose -f docker-compose-dev.yaml --profile ipfs up -V --abort-on-container-exit
 
 #Reset command:
-#docker-compose -f docker-compose-dev.yaml --profile ipfs --profile consensus down --volumes
+#docker-compose -f docker-compose-dev.yaml --profile ipfs down --volumes
