@@ -107,6 +107,16 @@ services:
       start_period: 30s
   ipfs:
     image: ipfs/kubo:release
+    entrypoint: >
+      /bin/sh -c "
+      echo 'adding cronjob';
+      mkdir -p /var/spool/cron/crontabs;
+      croncmd=\"cd /data/ipfs && find . -type f -mtime +7 -name \\"*.data\\" | xargs rm -f 2>&1\";
+      cronjob=\"0 * * * * $$croncmd\";
+      ( crontab -l | grep -v -F \"$$croncmd\" ; echo \"$$cronjob\" ) | crontab -;
+      echo 'starting ipfs';
+      /sbin/tini -- /usr/local/bin/start_ipfs daemon --migrate=true --agent-version-suffix=docker;
+      "
     #command:
     #   ["daemon", "--migrate=true", "--agent-version-suffix=docker"]
     expose:
