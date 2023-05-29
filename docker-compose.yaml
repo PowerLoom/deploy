@@ -51,8 +51,10 @@ services:
         condition: service_healthy
     expose:
       - 8002
+      - 8555
     ports:
       - 8002:8002
+      - 8555:8555
     volumes:
       - local_cache:/home/ubuntu/local_cache/
     environment:
