@@ -14,8 +14,10 @@ cd ../ap-consensus-dashboard/ && ./build-docker.sh;
 
 cd ../deploy;
 
-#docker-compose -f docker-compose-dev.yaml up -V --abort-on-container-exit
+# Use this for local IPFS node
 docker-compose -f docker-compose-dev.yaml --profile ipfs up -V --abort-on-container-exit
+# Use this if you're using external IPFS node
+#docker-compose -f docker-compose-dev.yaml up -V --abort-on-container-exit
 
 #Reset command:
 #docker-compose -f docker-compose-dev.yaml --profile ipfs down --volumes

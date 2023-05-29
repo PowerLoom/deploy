@@ -82,7 +82,7 @@ services:
       retries: 3
       start_period: 20s
 
-  offchainconsensus-frontend:
+  consensus-frontend:
     image: powerloom-offchainconsensus-frontend
     expose:
       - 4173
