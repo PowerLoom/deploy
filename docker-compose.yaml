@@ -16,11 +16,10 @@ services:
          condition: service_healthy
       rabbitmq:
          condition: service_healthy
-    #  - "ipfs"
     volumes:
       - local_cache:/home/ubuntu/local_cache/
     links:
-    #  - "ipfs"
+      - "ipfs"
       - "redis"
       - "rabbitmq"
     environment:
@@ -49,6 +48,10 @@ services:
     depends_on:
       audit-protocol:
         condition: service_healthy
+    links:
+      - "ipfs"
+      - "redis"
+      - "rabbitmq"
     expose:
       - 8002
       - 8555
