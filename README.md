@@ -1,7 +1,7 @@
 # PowerLoom Deployment
-Scripts to deploy PowerLoom services (`audit-protocol` and `pooler`) to [offchain consensus](https://medium.com/powerloom/open-sesame-deb52685bacb).
+Scripts to deploy PowerLoom services (`audit-protocol` and `pooler`) to [PowerLoom Network](#TODO:Add_URL).
 
-> Note: In this private alpha, you need a UUID from us to participate in the `hosted` consensus. Please [fill this form](https://powerloom.io/consensus-invite) to request access.
+> Note: In this private alpha, you need to get your EVM account whitelisted from us to participate in the netowrk. Please [fill this form](https://powerloom.io/consensus-invite) to request access.
 
 ## Requirements
 
@@ -10,16 +10,27 @@ Scripts to deploy PowerLoom services (`audit-protocol` and `pooler`) to [offchai
 3. IPFS daemon (locally or remote instance with API port `5001` tunneled to localhost).
     - While we have __included__ this in our autobuild docker setup, we've noticed issues on non-server setups.
     - Regardless, IPFS daemon can hog __*a lot*__ of resources - it is not recommended to run this on a personal computer unless you have a strong internet connection and dedicated CPU+RAM.
-    - _3rd party IPFS services such as Pinata/Infura are not supported_
+    - 3rd party IPFS services that provide default IFPS interface like Infura are now supported
 4. RPC URL for `Ethereum mainnet`. We recommend running a full geth node to save costs and to stick to ethos of decentralization :)
 > Our default (lite mode) setup is designed to work well with a free plan on any of the RPC providers like [Alchemy](https://alchemy.com/?r=15ce6db6d0a109d5), [Infura](https://infura.io), [Quicknode](https://www.quicknode.com?tap_a=67226-09396e&tap_s=3491854-f4a458), etc. It even works with Ankr's [public endpoint](https://rpc.ankr.com/eth) but we recommend signing up to track usage. For those interested in exploring the the full setup, we can also arrange for a special pan through our partners such as BlockVigil.
 
 ## For snapshotters
 
-1. Copy `env.example to .env`
-    - Ensure `RPC_URL` and `UUID` are filled.
-    - Optionally, you may also set `WEB3_STORAGE_TOKEN` which can be generated/retreived from your [API tokens page](https://web3.storage/tokens/?create=true) after signing for a free plan at web3.storage.
-    - `CONSENSUS_URL` should be left empty unless you have been instructed to do by our team.
+1. Copy `env.example` to `.env`.
+   - Ensure the following required variables are filled:
+     - `SOURCE_RPC_URL`: The URL for the source RPC (Remote Procedure Call) service.
+     - `SIGNER_ACCOUNT_ADDRESS`: The address of the signer account.
+     - `SIGNER_ACCOUNT_PRIVATE_KEY`: The private key corresponding to the signer account address.
+   - Optionally, you may also set the following variables:
+     - `PROST_RPC_URL`: The URL for the PROST RPC service.
+     - `IPFS_URL`: The URL for the IPFS (InterPlanetary File System) service.
+     - `IPFS_API_KEY`: The API key for the IPFS service (if required).
+     - `IPFS_API_SECRET`: The API secret for the IPFS service (if required).
+     - `PROTOCOL_STATE_CONTRACT`: The contract address for the protocol state.
+     - `RELAYER_HOST`: The host address for the relayer.
+     - `SLACK_REPORTING_URL`: The URL for reporting to Slack.
+     - `POWERLOOM_REPORTING_URL`: The URL for reporting to PowerLoom.
+     - `WEB3_STORAGE_TOKEN`: The token for Web3.Storage. You can generate or retrieve this token from your [API tokens page](https://web3.storage/tokens/?create=true) after signing up for a free plan at web3.storage.
 
 2. Run the following command (ideally in a `screen`) and follow instructions
 
@@ -32,11 +43,11 @@ Scripts to deploy PowerLoom services (`audit-protocol` and `pooler`) to [offchai
 
     - Note that the data shown in your own dashboard will not be same as production UI on PowerLoom.io as the "lite mode" is only set to snapshot 7 pair contracts. Refer to contributors section below to enable all pairs.
 
-4. We have setup a bare-bones consensus dashboard at: [offchain-consensus.powerloom.io](https://offchain-consensus.powerloom.io/)
+4. We have setup a bare-bones consensus dashboard at: [consensus.powerloom.io](#TODO:Add_URL)
 
 5. To shutdown services, just press `Ctrl+C` (and again to force).
 
-    > If you don't keep services running for extended periods of time, this will affect consensus and we may be forced to de-activate your snapshotter UUID.
+    > If you don't keep services running for extended periods of time, this will affect consensus and we may be forced to de-activate your snapshotter account.
     
 6. If you see issues with data, you can do a clean *reset* by running the following command before restarting step 3:
 
@@ -44,11 +55,10 @@ Scripts to deploy PowerLoom services (`audit-protocol` and `pooler`) to [offchai
 
 ## Instructions for code contributors
 
-1. Ensure `settings.json` and `static/cached_pair_addresses.json` files are populated in relevant directories
+1. Ensure `settings.json` and other relevant files are populated in proper directories
     - `../audit-protocol`
     - `../pooler`
-    - `../offchain-consensus` (if used)
-    - others such as `../pooler-frontend` and `../ap-consensus-dashboard` will work by default but do require the latest code to be cloned in the parent directory. Refer to script below.
+    - others such as `../pooler-frontend` and `../ap-consensus-dashboard` will work by default but do require the latest code to be cloned in the parent directory. Refer to `build-dev.sh` for clone instructions.
 
 2. Run the following command:
 

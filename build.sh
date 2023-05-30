@@ -57,14 +57,14 @@ echo "building...";
 if ! [ -x "$(command -v docker-compose)" ]; then
     echo 'docker compose not found, trying to see if compose exists within docker';
     docker compose pull;
-    if ["$IPFS_URL"]; then
-        docker compose up --profile ipfs -V --abort-on-container-exit
+    if [ -z "$IPFS_URL"]; then
+        docker compose --profile ipfs up -V --abort-on-container-exit
     else
         docker compose up -V --abort-on-container-exit
     fi
 else
     docker-compose pull;
-    if ["$IPFS_URL"]; then
+    if [ -z "$IPFS_URL"]; then
         docker-compose --profile ipfs up -V --abort-on-container-exit
     else
         docker-compose up -V --abort-on-container-exit
