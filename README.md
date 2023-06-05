@@ -1,7 +1,7 @@
 # PowerLoom Deployment
 Scripts to deploy PowerLoom services (`audit-protocol` and `pooler`) to [PowerLoom Network](#TODO:Add_URL).
 
-> Note: In this private alpha, you need to get your EVM account whitelisted from us to participate in the netowrk. Please [fill this form](https://powerloom.io/consensus-invite) to request access.
+> Note: In this private alpha, you need to get your EVM wallet address whitelisted from us to participate in the network. Please [fill this form](https://powerloom.io/consensus-invite) to request access.
 
 ## Requirements
 
