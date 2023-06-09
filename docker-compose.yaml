@@ -11,26 +11,29 @@ services:
       - 9000:9000
       - 9002:9002
       - 9030:9030
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
-
     depends_on:
       redis:
          condition: service_healthy
       rabbitmq:
          condition: service_healthy
-    #  - "ipfs"
     volumes:
       - local_cache:/home/ubuntu/local_cache/
     links:
-    #  - "ipfs"
+      - "ipfs"
       - "redis"
       - "rabbitmq"
     environment:
-      - RPC_URL=$RPC_URL
-      - UUID=$UUID
+      - SIGNER_ACCOUNT_ADDRESS=$SIGNER_ACCOUNT_ADDRESS
+      - SIGNER_ACCOUNT_PRIVATE_KEY=$SIGNER_ACCOUNT_PRIVATE_KEY
+      - PROST_RPC_URL=$PROST_RPC_URL
+      - IPFS_URL=$IPFS_URL
+      - IPFS_API_KEY=$IPFS_API_KEY
+      - IPFS_API_SECRET=$IPFS_API_SECRET
+      - PROTOCOL_STATE_CONTRACT=$PROTOCOL_STATE_CONTRACT
+      - RELAYER_HOST=$RELAYER_HOST
+      - SLACK_REPORTING_URL=$SLACK_REPORTING_URL
+      - POWERLOOM_REPORTING_URL=$POWERLOOM_REPORTING_URL
       - WEB3_STORAGE_TOKEN=$WEB3_STORAGE_TOKEN
-      - CONSENSUS_URL=$CONSENSUS_URL
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:9000/health"]
       interval: 10s
@@ -40,22 +43,33 @@ services:
     command:
       bash -c "sh snapshotter_autofill.sh && sh init_processes.sh"
 
-
   pooler:
     image: ghcr.io/powerloom/pooler:latest
     depends_on:
       audit-protocol:
         condition: service_healthy
+    links:
+      - "ipfs"
+      - "redis"
+      - "rabbitmq"
     expose:
       - 8002
+      - 8555
     ports:
       - 8002:8002
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
+      - 8555:8555
+    volumes:
+      - local_cache:/home/ubuntu/local_cache/
     environment:
-      - RPC_URL=$RPC_URL
-      - UUID=$UUID
-      - CONSENSUS_URL=$CONSENSUS_URL
+      - SIGNER_ACCOUNT_ADDRESS=$SIGNER_ACCOUNT_ADDRESS
+      - SOURCE_RPC_URL=$SOURCE_RPC_URL
+      - PROST_RPC_URL=$PROST_RPC_URL
+      - IPFS_URL=$IPFS_URL
+      - IPFS_API_KEY=$IPFS_API_KEY
+      - IPFS_API_SECRET=$IPFS_API_SECRET
+      - PROTOCOL_STATE_CONTRACT=$PROTOCOL_STATE_CONTRACT
+      - SLACK_REPORTING_URL=$SLACK_REPORTING_URL
+      - POWERLOOM_REPORTING_URL=$POWERLOOM_REPORTING_URL
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8002/health"]
       interval: 10s
@@ -111,6 +125,7 @@ services:
       start_period: 30s
   ipfs:
     image: ipfs/kubo:release
+    profiles: ["ipfs"]
     entrypoint: >
       /bin/sh -c "
       echo 'adding cronjob';
