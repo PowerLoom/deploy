@@ -1,5 +1,5 @@
 # PowerLoom Deployment
-Scripts to deploy PowerLoom services (`audit-protocol` and `pooler`) to [PowerLoom Network](#TODO:Add_URL).
+Scripts to deploy PowerLoom services (`audit-protocol` and `pooler`) to [PowerLoom Network](https://powerloom.io).
 
 > Note: In this private alpha, you need to get your EVM wallet address whitelisted from us to participate in the network. Please [fill this form](https://powerloom.io/consensus-invite) to request access.
 
@@ -10,8 +10,8 @@ Scripts to deploy PowerLoom services (`audit-protocol` and `pooler`) to [PowerLo
 3. IPFS daemon (locally or remote instance with API port `5001` tunneled to localhost).
     - While we have __included__ this in our autobuild docker setup, we've noticed issues on non-server setups.
     - Regardless, IPFS daemon can hog __*a lot*__ of resources - it is not recommended to run this on a personal computer unless you have a strong internet connection and dedicated CPU+RAM.
-    - 3rd party IPFS services that provide default IFPS interface like Infura are now supported
-4. RPC URL for `Ethereum mainnet`. We recommend running a full geth node to save costs and to stick to ethos of decentralization :)
+    - 3rd party IPFS services that provide default IFPS interface like Infura are now supported.
+4. RPC URL for `Ethereum mainnet`. We recommend running a full geth node to save costs and to stick to ethos of decentralization! :)
 > Our default (lite mode) setup is designed to work well with a free plan on any of the RPC providers like [Alchemy](https://alchemy.com/?r=15ce6db6d0a109d5), [Infura](https://infura.io), [Quicknode](https://www.quicknode.com?tap_a=67226-09396e&tap_s=3491854-f4a458), etc. It even works with Ankr's [public endpoint](https://rpc.ankr.com/eth) but we recommend signing up to track usage. For those interested in exploring the the full setup, we can also arrange for a special pan through our partners such as BlockVigil.
 
 ## For snapshotters
@@ -23,7 +23,7 @@ Scripts to deploy PowerLoom services (`audit-protocol` and `pooler`) to [PowerLo
      - `SIGNER_ACCOUNT_PRIVATE_KEY`: The private key corresponding to the signer account address.
    - Optionally, you may also set the following variables:
      - `PROST_RPC_URL`: The URL for the PROST RPC service.
-     - `IPFS_URL`: The URL for the IPFS (InterPlanetary File System) service.
+     - `IPFS_URL`: The URL for the IPFS (InterPlanetary File System) service in multiaddr format (e.g. `/dns4/ipfs.infura.io/tcp/5001/https`)
      - `IPFS_API_KEY`: The API key for the IPFS service (if required).
      - `IPFS_API_SECRET`: The API secret for the IPFS service (if required).
      - `PROTOCOL_STATE_CONTRACT`: The contract address for the protocol state.
@@ -43,7 +43,7 @@ Scripts to deploy PowerLoom services (`audit-protocol` and `pooler`) to [PowerLo
 
     - Note that the data shown in your own dashboard will not be same as production UI on PowerLoom.io as the "lite mode" is only set to snapshot 7 pair contracts. Refer to contributors section below to enable all pairs.
 
-4. We have setup a bare-bones consensus dashboard at: [consensus.powerloom.io](#TODO:Add_URL)
+4. We have setup a bare-bones consensus dashboard at: [consensus.powerloom.io](https://onchain-consensus.powerloom.io)
 
 5. To shutdown services, just press `Ctrl+C` (and again to force).
 
@@ -51,7 +51,7 @@ Scripts to deploy PowerLoom services (`audit-protocol` and `pooler`) to [PowerLo
     
 6. If you see issues with data, you can do a clean *reset* by running the following command before restarting step 3:
 
-    `docker-compose down --volumes`
+    `docker-compose --profile ipfs down --volumes`
 
 ## Instructions for code contributors
 
