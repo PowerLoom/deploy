@@ -1,5 +1,5 @@
 # PowerLoom Deployment
-Scripts to deploy PowerLoom services (`audit-protocol` and `pooler`) to [PowerLoom Network](https://powerloom.io).
+Scripts to deploy PowerLoom services ([audit-protocol](https://github.com/PowerLoom/audit-protocol) and [pooler](https://github.com/PowerLoom/pooler)) to [PowerLoom Network](https://onchain-consensus.powerloom.io).
 
 > Note: In this private alpha, you need to get your EVM wallet address whitelisted from us to participate in the network. Please [fill this form](https://powerloom.io/consensus-invite) to request access.
 
@@ -63,7 +63,10 @@ Scripts to deploy PowerLoom services (`audit-protocol` and `pooler`) to [PowerLo
 2. Run the following command:
 
     `./build-dev.sh`
+3. If you see issues with data, you can do a clean *reset* by running the following command before restarting step 2:
+
+    `docker-compose -f docker-compose-dev.yaml --profile ipfs --profile consensus down --volumes`
 
 ## Questions?
-1. Ask on our [Discord](https://discord.com/channels/777248105636560948/1063022869040353300) - if you don't see the channel, ask an admin to add the snapshotter `role` to your account.
+1. Ask on our [Discord](https://powerloom.io/discord) - if you don't see the channel, ask an admin to add the snapshotter `role` to your account.
 2. Create an [issue](https://github.com/PowerLoom/deploy/issues/new)
