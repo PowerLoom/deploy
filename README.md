@@ -7,9 +7,8 @@ Scripts to deploy PowerLoom services ([audit-protocol](https://github.com/PowerL
 
 1. Latest version of `docker` (`>= 20.10.21`) and `docker-compose` (`>= v2.13.0`)
 2. At least 4 core CPU, 8GB RAM and 50GB SSD - make sure to choose the correct spec when deploying to Github Codespaces.
-3. IPFS daemon (locally or remote instance with API port `5001` tunneled to localhost).
-    - While we have __included__ this in our autobuild docker setup, we've noticed issues on non-server setups.
-    - Regardless, IPFS daemon can hog __*a lot*__ of resources - it is not recommended to run this on a personal computer unless you have a strong internet connection and dedicated CPU+RAM.
+3. IPFS node
+    - While we have __included__ a node in our autobuild docker setup, IPFS daemon can hog __*a lot*__ of resources - it is not recommended to run this on a personal computer unless you have a strong internet connection and dedicated CPU+RAM.
     - 3rd party IPFS services that provide default IFPS interface like Infura are now supported.
 4. RPC URL for `Ethereum mainnet`. We recommend running a full geth node to save costs and to stick to ethos of decentralization! :)
 > Our default (lite mode) setup is designed to work well with a free plan on any of the RPC providers like [Alchemy](https://alchemy.com/?r=15ce6db6d0a109d5), [Infura](https://infura.io), [Quicknode](https://www.quicknode.com?tap_a=67226-09396e&tap_s=3491854-f4a458), etc. It even works with Ankr's [public endpoint](https://rpc.ankr.com/eth) but we recommend signing up to track usage. For those interested in exploring the the full setup, we can also arrange for a special pan through our partners such as BlockVigil.
@@ -23,7 +22,7 @@ Scripts to deploy PowerLoom services ([audit-protocol](https://github.com/PowerL
      - `SIGNER_ACCOUNT_PRIVATE_KEY`: The private key corresponding to the signer account address.
    - Optionally, you may also set the following variables:
      - `PROST_RPC_URL`: The URL for the PROST RPC service.
-     - `IPFS_URL`: The URL for the IPFS (InterPlanetary File System) service in multiaddr format (e.g. `/dns4/ipfs.infura.io/tcp/5001/https`)
+     - `IPFS_URL`: The URL for the IPFS (InterPlanetary File System) service in HTTP(s) (e.g. `https://ipfs.infura.io:5001`) multiaddr format (e.g. `/dns4/ipfs.infura.io/tcp/5001/https`)
      - `IPFS_API_KEY`: The API key for the IPFS service (if required).
      - `IPFS_API_SECRET`: The API secret for the IPFS service (if required).
      - `PROTOCOL_STATE_CONTRACT`: The contract address for the protocol state.
