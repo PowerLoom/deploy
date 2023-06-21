@@ -88,6 +88,8 @@ services:
       - 3000
     ports:
       - 3000:3000
+    environment:
+      - POOLER_API_PREFIX=$POOLER_API_PREFIX
     healthcheck:
       test: ["CMD", "wget", "-qO-","http://localhost:3000"]
       interval: 10s

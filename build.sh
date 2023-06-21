@@ -23,6 +23,15 @@ echo "Found SOURCE RPC URL ${SOURCE_RPC_URL}";
 
 echo "Found SIGNER ACCOUNT ADDRESS ${SIGNER_ACCOUNT_ADDRESS}";
 
+if [ "$CODESPACE_NAME" ]; then
+    export POOLER_API_PREFIX="https://${CODESPACE_NAME}-8002.${GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN}";
+    echo "Running in Github codespace, autofilling POOLER_API_PREFIX..";
+fi
+
+if [ "$POOLER_API_PREFIX" ]; then
+    echo "Found POOLER_API_PREFIX ${POOLER_API_PREFIX}";
+fi
+
 if [ "$PROST_RPC_URL" ]; then
     echo "Found PROST_RPC_URL ${PROST_RPC_URL}";
 fi
@@ -60,13 +69,13 @@ if ! [ -x "$(command -v docker-compose)" ]; then
     if [ -z "$IPFS_URL" ]; then
         docker compose --profile ipfs up -V --abort-on-container-exit
     else
-        docker compose up -V --abort-on-container-exit
+        docker compose up --no-deps -V --abort-on-container-exit
     fi
 else
     docker-compose pull;
     if [ -z "$IPFS_URL" ]; then
         docker-compose --profile ipfs up -V --abort-on-container-exit
     else
-        docker-compose up -V --abort-on-container-exit
+        docker-compose up --no-deps -V --abort-on-container-exit
     fi
 fi
