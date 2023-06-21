@@ -69,13 +69,13 @@ if ! [ -x "$(command -v docker-compose)" ]; then
     if [ -z "$IPFS_URL" ]; then
         docker compose --profile ipfs up -V --abort-on-container-exit
     else
-        docker compose up -V --abort-on-container-exit
+        docker compose up --no-deps -V --abort-on-container-exit
     fi
 else
     docker-compose pull;
     if [ -z "$IPFS_URL" ]; then
         docker-compose --profile ipfs up -V --abort-on-container-exit
     else
-        docker-compose up -V --abort-on-container-exit
+        docker-compose up --no-deps -V --abort-on-container-exit
     fi
 fi
