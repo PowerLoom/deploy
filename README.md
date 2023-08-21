@@ -1,7 +1,7 @@
 # PowerLoom Deployment
 Scripts to deploy PowerLoom services ([audit-protocol](https://github.com/PowerLoom/audit-protocol) and [pooler](https://github.com/PowerLoom/pooler)) to [PowerLoom Network](https://onchain-consensus.powerloom.io).
 
-> Note: In this private alpha, you need to get your EVM wallet address whitelisted from us to participate in the network. Please [fill this form](https://powerloom.io/consensus-invite) to request access.
+> Note: We just announced an incentivized testnet, [register here](https://coinlist.co/powerloom-testnet) to participate in the network.
 
 ## Requirements
 
