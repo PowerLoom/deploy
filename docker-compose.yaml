@@ -2,7 +2,7 @@ version: '3.9'
 
 services:
   audit-protocol:
-    image: ghcr.io/powerloom/audit-protocol:latest
+    image: ghcr.io/powerloom/audit-protocol:testnet_pretask
     expose:
       - 9000
       - 9002
@@ -44,7 +44,7 @@ services:
       bash -c "sh snapshotter_autofill.sh && sh init_processes.sh"
 
   pooler:
-    image: ghcr.io/powerloom/pooler:latest
+    image: ghcr.io/powerloom/pooler:testnet_pretask
     depends_on:
       audit-protocol:
         condition: service_healthy
@@ -80,7 +80,7 @@ services:
       bash -c "sh snapshotter_autofill.sh && sh init_processes.sh"
 
   pooler-frontend:
-    image: ghcr.io/powerloom/pooler-frontend:latest
+    image: ghcr.io/powerloom/pooler-frontend:testnet_pretask
     depends_on:
       pooler:
         condition: service_healthy
