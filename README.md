@@ -15,10 +15,14 @@ Scripts to deploy PowerLoom services ([audit-protocol](https://github.com/PowerL
 
 ## For snapshotters
 
-1. Copy `env.example` to `.env`.
+1. Clone the repository for pretask simulation.
+
+ `git clone https://github.com/PowerLoom/deploy.git --single-branch powerloom_testnet_pretask --branch testnet_pretask && cd powerloom_testnet_pretask`
+
+2. Copy `env.example` to `.env`.
    - Ensure the following required variables are filled:
-     - `SOURCE_RPC_URL`: The URL for the source RPC (Remote Procedure Call) service.
-     - `SIGNER_ACCOUNT_ADDRESS`: The address of the signer account.
+     - `SOURCE_RPC_URL`: The URL for the source RPC (Local node/Infura/Alchemy) service.
+     - `SIGNER_ACCOUNT_ADDRESS`: The address of the signer account. This is your whitelisted address on testnet - please file [a ticket](https://discord.com/channels/777248105636560948/1146936525544759457) if you need a new burner wallet registered.
      - `SIGNER_ACCOUNT_PRIVATE_KEY`: The private key corresponding to the signer account address.
    - Optionally, you may also set the following variables:
      - `PROST_RPC_URL`: The URL for the PROST RPC service.
@@ -31,7 +35,7 @@ Scripts to deploy PowerLoom services ([audit-protocol](https://github.com/PowerL
      - `POWERLOOM_REPORTING_URL`: The URL for reporting to PowerLoom.
      - `WEB3_STORAGE_TOKEN`: The token for Web3.Storage. You can generate or retrieve this token from your [API tokens page](https://web3.storage/tokens/?create=true) after signing up for a free plan at web3.storage.
 
-2. Run the following command (ideally in a `screen`) and follow instructions
+3. Run the following command (ideally in a `screen`) and follow instructions
 
     `./build.sh`
 
@@ -42,7 +46,7 @@ Scripts to deploy PowerLoom services ([audit-protocol](https://github.com/PowerL
 
     - Note that the data shown in your own dashboard will not be same as production UI on PowerLoom.io as the "lite mode" is only set to snapshot 7 pair contracts. Refer to contributors section below to enable all pairs.
 
-4. We have setup a bare-bones consensus dashboard at: [consensus.powerloom.io](https://onchain-consensus.powerloom.io)
+4. We have setup a bare-bones consensus dashboard at: [powerloom.network](https://pretest-consensus.powerloom.io/projects/aggregate_24h_stats_lite:9fb408548a732c85604dacb9c956ffc2538a3b895250741593da630d994b1f27:UNISWAPV2). In a few minutes, your snapshotter address will start show up - use the search box to filter the results.
 
 5. To shutdown services, just press `Ctrl+C` (and again to force).
 
