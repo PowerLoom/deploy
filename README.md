@@ -11,9 +11,9 @@ Scripts to deploy PowerLoom services ([audit-protocol](https://github.com/PowerL
     - While we have __included__ a node in our autobuild docker setup, IPFS daemon can hog __*a lot*__ of resources - it is not recommended to run this on a personal computer unless you have a strong internet connection and dedicated CPU+RAM.
     - 3rd party IPFS services that provide default IFPS interface like Infura are now supported.
 4. RPC URL for `Ethereum mainnet`. We recommend running a full geth node to save costs and to stick to ethos of decentralization! :)
-> Our default (lite mode) setup is designed to work well with a free plan on any of the RPC providers like [Alchemy](https://alchemy.com/?r=15ce6db6d0a109d5), [Infura](https://infura.io), [Quicknode](https://www.quicknode.com?tap_a=67226-09396e&tap_s=3491854-f4a458), etc. It even works with Ankr's [public endpoint](https://rpc.ankr.com/eth) but we recommend signing up to track usage. For those interested in exploring the the full setup, we can also arrange for a special pan through our partners such as BlockVigil.
+> This pretest simulation setup is designed to only work with a paid plans on any of the RPC providers like [Alchemy](https://alchemy.com/?r=15ce6db6d0a109d5), [Infura](https://infura.io), [Quicknode](https://www.quicknode.com?tap_a=67226-09396e&tap_s=3491854-f4a458), etc. Please reach out to us if none of the options are viable.
 
-## For snapshotters
+## For snapshotters (pretask simulation only)
 
 1. Clone the repository for pretask simulation.
 
@@ -24,26 +24,16 @@ Scripts to deploy PowerLoom services ([audit-protocol](https://github.com/PowerL
      - `SOURCE_RPC_URL`: The URL for the source RPC (Local node/Infura/Alchemy) service.
      - `SIGNER_ACCOUNT_ADDRESS`: The address of the signer account. This is your whitelisted address on testnet - please file [a ticket](https://discord.com/channels/777248105636560948/1146936525544759457) if you need a new burner wallet registered.
      - `SIGNER_ACCOUNT_PRIVATE_KEY`: The private key corresponding to the signer account address.
-   - Optionally, you may also set the following variables:
-     - `PROST_RPC_URL`: The URL for the PROST RPC service.
-     - `IPFS_URL`: The URL for the IPFS (InterPlanetary File System) service in HTTP(s) (e.g. `https://ipfs.infura.io:5001`) multiaddr format (e.g. `/dns4/ipfs.infura.io/tcp/5001/https`)
-     - `IPFS_API_KEY`: The API key for the IPFS service (if required).
-     - `IPFS_API_SECRET`: The API secret for the IPFS service (if required).
-     - `PROTOCOL_STATE_CONTRACT`: The contract address for the protocol state.
-     - `RELAYER_HOST`: The host address for the relayer.
-     - `SLACK_REPORTING_URL`: The URL for reporting to Slack.
-     - `POWERLOOM_REPORTING_URL`: The URL for reporting to PowerLoom.
-     - `WEB3_STORAGE_TOKEN`: The token for Web3.Storage. You can generate or retrieve this token from your [API tokens page](https://web3.storage/tokens/?create=true) after signing up for a free plan at web3.storage.
 
 3. Open a screen by typing `screen` and then follow instructions by running
 
     `./build.sh`
 
-    If the `.env` is filled up correctly, all services will execute one by one. The logs do fill up quick. So, remember to safely detach from screen when not using it. If you see the following error, your snapshotter address is not registered.
+    If the `.env` is filled up correctly, all services will execute one by one. The logs do fill up quick. So, remember to [safely detach](https://linuxize.com/post/how-to-use-linux-screen/) from screen when not using it. If you see the following error, your snapshotter address is not registered.
 
     ```
     deploy-pooler-1           | Snapshotter identity check failed on protocol smart contract
-deploy-pooler-1 exited with code 1
+    deploy-pooler-1 exited with code 1
     ```
 
 3. Once all the services are up and running, the front-end can be accessed via [Pooler Frontend](http://localhost:3000) to see a UNISWAPV2 summary data dashboard similar to [PowerLoom UNISWAPV2 Prod](https://uniswapv2.powerloom.io/).
