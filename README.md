@@ -52,21 +52,3 @@ Scripts to deploy PowerLoom services ([audit-protocol](https://github.com/PowerL
 6. If you see issues with data, you can do a clean *reset* by running the following command before restarting step 3:
 
     `docker-compose --profile ipfs down --volumes`
-
-## Instructions for code contributors
-
-1. Ensure `settings.json` and other relevant files are populated in proper directories
-    - `../audit-protocol`
-    - `../pooler`
-    - others such as `../pooler-frontend` and `../ap-consensus-dashboard` will work by default but do require the latest code to be cloned in the parent directory. Refer to `build-dev.sh` for clone instructions.
-
-2. Run the following command:
-
-    `./build-dev.sh`
-3. If you see issues with data, you can do a clean *reset* by running the following command before restarting step 2:
-
-    `docker-compose -f docker-compose-dev.yaml --profile ipfs --profile consensus down --volumes`
-
-## Questions?
-1. Ask on our [Discord](https://powerloom.io/discord) - if you don't see the channel, ask an admin to add the snapshotter `role` to your account.
-2. Create an [issue](https://github.com/PowerLoom/deploy/issues/new)
