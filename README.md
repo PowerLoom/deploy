@@ -35,9 +35,16 @@ Scripts to deploy PowerLoom services ([audit-protocol](https://github.com/PowerL
      - `POWERLOOM_REPORTING_URL`: The URL for reporting to PowerLoom.
      - `WEB3_STORAGE_TOKEN`: The token for Web3.Storage. You can generate or retrieve this token from your [API tokens page](https://web3.storage/tokens/?create=true) after signing up for a free plan at web3.storage.
 
-3. Run the following command (ideally in a `screen`) and follow instructions
+3. Open a screen by typing `screen` and then follow instructions by running
 
     `./build.sh`
+
+    If the `.env` is filled up correctly, all services will execute one by one. The logs do fill up quick. So, remember to safely detach from screen when not using it. If you see the following error, your snapshotter address is not registered.
+
+    ```
+    deploy-pooler-1           | Snapshotter identity check failed on protocol smart contract
+deploy-pooler-1 exited with code 1
+    ```
 
 3. Once all the services are up and running, the front-end can be accessed via [Pooler Frontend](http://localhost:3000) to see a UNISWAPV2 summary data dashboard similar to [PowerLoom UNISWAPV2 Prod](https://uniswapv2.powerloom.io/).
     - A sample screenshot of the dashboard is given [here](./sample_images/pooler-frontend.jpg)

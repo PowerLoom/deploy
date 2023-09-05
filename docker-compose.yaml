@@ -19,7 +19,7 @@ services:
     volumes:
       - local_cache:/home/ubuntu/local_cache/
     links:
-      - "ipfs"
+    #  - "ipfs"
       - "redis"
       - "rabbitmq"
     environment:
@@ -49,7 +49,7 @@ services:
       audit-protocol:
         condition: service_healthy
     links:
-      - "ipfs"
+    #  - "ipfs"
       - "redis"
       - "rabbitmq"
     expose:
