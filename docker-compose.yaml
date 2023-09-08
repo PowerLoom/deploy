@@ -2,7 +2,7 @@ version: '3.9'
 
 services:
   audit-protocol:
-    image: ghcr.io/powerloom/audit-protocol:testnet_pretask
+    image: ghcr.io/powerloom/audit-protocol:testnet_5_pairs
     expose:
       - 9000
       - 9002
@@ -44,7 +44,7 @@ services:
       bash -c "sh snapshotter_autofill.sh && sh init_processes.sh"
 
   pooler:
-    image: ghcr.io/powerloom/pooler:testnet_pretask
+    image: ghcr.io/powerloom/pooler:testnet_5_pairs
     depends_on:
       audit-protocol:
         condition: service_healthy
@@ -60,6 +60,7 @@ services:
       - 8555:8555
     volumes:
       - local_cache:/home/ubuntu/local_cache/
+      - logs/:/logs
     environment:
       - SIGNER_ACCOUNT_ADDRESS=$SIGNER_ACCOUNT_ADDRESS
       - SOURCE_RPC_URL=$SOURCE_RPC_URL
@@ -80,7 +81,7 @@ services:
       bash -c "sh snapshotter_autofill.sh && sh init_processes.sh"
 
   pooler-frontend:
-    image: ghcr.io/powerloom/pooler-frontend:testnet_pretask
+    image: ghcr.io/powerloom/pooler-frontend:testnet_5_pairs
     depends_on:
       pooler:
         condition: service_healthy
