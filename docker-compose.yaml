@@ -18,6 +18,7 @@ services:
          condition: service_healthy
     volumes:
       - local_cache:/home/ubuntu/local_cache/
+      - logs/:/root/.pm2/logs
     links:
       - "ipfs"
       - "redis"

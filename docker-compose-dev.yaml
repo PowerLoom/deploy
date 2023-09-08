@@ -22,6 +22,7 @@ services:
     #  - "ipfs"
     volumes:
       - local_cache:/home/ubuntu/local_cache/
+      - logs/:/root/.pm2/logs
     links:
     #  - "ipfs"
       - "redis"
@@ -54,6 +55,7 @@ services:
       - local_cache:/home/ubuntu/local_cache/
       - ../pooler/pooler:/pooler
       - ../pooler/config:/config
+      - logs/:/logs
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8002/health"]
       interval: 10s
