@@ -18,7 +18,7 @@ services:
          condition: service_healthy
     volumes:
       - local_cache:/home/ubuntu/local_cache/
-      - logs/:/root/.pm2/logs
+      - ./logs/audit-protocol:/root/.pm2/logs
     links:
       - "ipfs"
       - "redis"
@@ -61,7 +61,7 @@ services:
       - 8555:8555
     volumes:
       - local_cache:/home/ubuntu/local_cache/
-      - logs/:/logs
+      - ./logs/pooler:/logs
     environment:
       - SIGNER_ACCOUNT_ADDRESS=$SIGNER_ACCOUNT_ADDRESS
       - SOURCE_RPC_URL=$SOURCE_RPC_URL
