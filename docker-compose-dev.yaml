@@ -53,7 +53,7 @@ services:
       - 8555:8555
     volumes:
       - local_cache:/home/ubuntu/local_cache/
-      - ../pooler/pooler:/pooler
+      - ../pooler/snapshotter:/snapshotter
       - ../pooler/config:/config
       - logs/:/logs
     healthcheck:
