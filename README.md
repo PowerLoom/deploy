@@ -13,11 +13,11 @@ Scripts to deploy PowerLoom services ([audit-protocol](https://github.com/PowerL
 4. RPC URL for `Ethereum mainnet`. We recommend running a full geth node to save costs and to stick to ethos of decentralization! :)
 > This pretest simulation setup is designed to only work with a paid plans on any of the RPC providers like [Alchemy](https://alchemy.com/?r=15ce6db6d0a109d5), [Infura](https://infura.io), [Quicknode](https://www.quicknode.com?tap_a=67226-09396e&tap_s=3491854-f4a458), etc. Please reach out to us if none of the options are viable.
 
-## For snapshotters (pretask simulation only)
+## For snapshotters
 
 1. Clone the repository for pretask simulation.
 
- `git clone https://github.com/PowerLoom/deploy.git --single-branch powerloom_testnet_pretask --branch testnet_pretask && cd powerloom_testnet_pretask`
+ `git clone https://github.com/PowerLoom/deploy.git --single-branch powerloom_testnet_5_pairs --branch testnet_5_pairs && cd powerloom_testnet_5_pairs`
 
 2. Copy `env.example` to `.env`.
    - Ensure the following required variables are filled:
@@ -36,14 +36,13 @@ Scripts to deploy PowerLoom services ([audit-protocol](https://github.com/PowerL
     deploy-pooler-1 exited with code 1
     ```
 
-3. Once all the services are up and running, the front-end can be accessed via [Pooler Frontend](http://localhost:3000) to see a UNISWAPV2 summary data dashboard similar to [PowerLoom UNISWAPV2 Prod](https://uniswapv2.powerloom.io/).
-    - A sample screenshot of the dashboard is given [here](./sample_images/pooler-frontend.jpg)
+3. We have setup a bare-bones consensus dashboard at: [testnet-consensus.powerloom.io](https://testnet-consensus.powerloom.io/projects/aggregate_24h_stats_lite:10ecae2f52160690abffff26efeb45568e5d67ea0bc7d4485d9ffb10ef437f33:UNISWAPV2). In a 5-10 minutes, your snapshotter address will start show up - use the search box to filter the results.
 
-    - This will also give an idea in case your snapshotting has fallen behind as you can notice from the time of last snapshot shown in the screenshot.
+4. Once all the services are up and running, the front-end can be accessed via [Pooler Frontend](http://localhost:3000) to see a UNISWAPV2 summary data dashboard similar to [PowerLoom UNISWAPV2 Prod](https://uniswapv2.powerloom.io/).
+    - A sample screenshot of the dashboard is given [here](./sample_images/pooler-frontend.jpg)
 
     - Note that the data shown in your own dashboard will not be same as production UI on PowerLoom.io as the "lite mode" is only set to snapshot 7 pair contracts. Refer to contributors section below to enable all pairs.
 
-4. We have setup a bare-bones consensus dashboard at: [powerloom.network](https://pretest-consensus.powerloom.io/projects/aggregate_24h_stats_lite:9fb408548a732c85604dacb9c956ffc2538a3b895250741593da630d994b1f27:UNISWAPV2). In a few minutes, your snapshotter address will start show up - use the search box to filter the results.
 
 5. To shutdown services, just press `Ctrl+C` (and again to force).
 
