@@ -130,6 +130,8 @@ services:
   ipfs:
     image: ipfs/kubo:release
     profiles: ["ipfs"]
+    environment:
+      - IPFS_PROFILE=server
     entrypoint: >
       /bin/sh -c "
       echo 'adding cronjob';
