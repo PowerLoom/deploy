@@ -126,7 +126,10 @@ services:
       retries: 3
       start_period: 30s
   ipfs:
-    image: ipfs/kubo:release
+    image: ipfs/kubo:v0.20.0
+    restart: always
+    environment:
+      IPFS_PROFILE: server
     profiles: ["ipfs"]
     entrypoint: >
       /bin/sh -c "
