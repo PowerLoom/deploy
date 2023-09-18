@@ -1,5 +1,5 @@
 # PowerLoom Deployment
-Scripts to deploy PowerLoom services ([audit-protocol](https://github.com/PowerLoom/audit-protocol) and [pooler](https://github.com/PowerLoom/pooler)) to [PowerLoom Network](https://onchain-consensus.powerloom.io).
+Scripts to deploy PowerLoom services ([audit-protocol](https://github.com/PowerLoom/audit-protocol) and [pooler](https://github.com/PowerLoom/pooler)) to [Powerloom network](https://onchain-consensus.powerloom.io).
 
 > Note: We just announced an incentivized testnet, [register here](https://coinlist.co/powerloom-testnet) to participate in the network.
 
@@ -15,7 +15,7 @@ Scripts to deploy PowerLoom services ([audit-protocol](https://github.com/PowerL
 
 ## For snapshotters (pretask simulation only)
 
-1. Clone the repository for pretask simulation.
+1. Clone the repository against the pretask simulation.
 
  `git clone https://github.com/PowerLoom/deploy.git --single-branch powerloom_testnet_pretask --branch testnet_pretask && cd powerloom_testnet_pretask`
 
@@ -36,19 +36,71 @@ Scripts to deploy PowerLoom services ([audit-protocol](https://github.com/PowerL
     deploy-pooler-1 exited with code 1
     ```
 
-3. Once all the services are up and running, the front-end can be accessed via [Pooler Frontend](http://localhost:3000) to see a UNISWAPV2 summary data dashboard similar to [PowerLoom UNISWAPV2 Prod](https://uniswapv2.powerloom.io/).
+   
+4. Check if all the necessary docker containers are up and running. You should see an output against `docker ps` with the following cotnainers listed:
+
+    ```
+    # docker ps
+
+    CONTAINER ID   IMAGE                                  COMMAND                  CREATED       STATUS                 PORTS                                                                                                                                                 NAMES
+    bfa1abe2b8aa   powerloom-pooler-frontend              "sh -c 'sh snapshott…"   2 hours ago   Up 2 hours (healthy)   0.0.0.0:3000->3000/tcp, :::3000->3000/tcp                                                                                                             deploy-pooler-frontend-1
+    852f3445f11c   powerloom-pooler                       "bash -c 'sh init_pr…"   2 hours ago   Up 2 hours (healthy)   0.0.0.0:8002->8002/tcp, :::8002->8002/tcp, 0.0.0.0:8555->8555/tcp, :::8555->8555/tcp                                                                  deploy-pooler-1
+    ee652fda8513   powerloom-audit-protocol               "bash -c 'sh init_pr…"   2 hours ago   Up 2 hours (healthy)   0.0.0.0:9000->9000/tcp, :::9000->9000/tcp, 0.0.0.0:9002->9002/tcp, :::9002->9002/tcp                                                                  deploy-audit-protocol-1
+    b0904614d5a3   powerloom-onchain-consensus            "/bin/sh -c 'sh init…"   2 hours ago   Up 2 hours             0.0.0.0:9030-9031->9030-9031/tcp, :::9030-9031->9030-9031/tcp                                                                                         deploy-onchain-consensus-1
+    5547fb5c1ab4   ipfs/kubo:release                      "/sbin/tini -- /usr/…"   2 hours ago   Up 2 hours (healthy)   4001/tcp, 8080-8081/tcp, 4001/udp, 0.0.0.0:5001->5001/tcp, :::5001->5001/tcp                                                                          deploy-ipfs-1
+    999de5864a1b   rabbitmq:3-management                  "docker-entrypoint.s…"   2 hours ago   Up 2 hours (healthy)   4369/tcp, 5671/tcp, 0.0.0.0:5672->5672/tcp, :::5672->5672/tcp, 15671/tcp, 15691-15692/tcp, 25672/tcp, 0.0.0.0:15672->15672/tcp, :::15672->15672/tcp   deploy-rabbitmq-1
+    2c14926d7cfd   redis                                  "docker-entrypoint.s…"   2 hours ago   Up 2 hours (healthy)   0.0.0.0:6379->6379/tcp, :::6379->6379/tcp                                                                                                             deploy-redis-1
+    581231debde9   powerloom-offchainconsensus-frontend   "docker-entrypoint.s…"   2 hours ago   Up 2 hours (healthy)   0.0.0.0:4173->4173/tcp, :::4173->4173/tcp                                                                                                             deploy-consensus-frontend-1
+    ```
+
+5. To be sure whether your snapshotter is processing epochs and submitting snapshots for consensus, run the following internal API query on Pooler Core API from your browser.
+
+> For detailed documentation on internal APIs and the low level details exposed by them, refer to the Pooler docs.
+
+**Tunnel from your local machine to the remote deploy instance on the [`core_api`](https://github.com/PowerLoom/pooler/tree/testnet_pretask#core-api) port**
+
+This opens up port 8002.
+
+```
+ssh -nNTv -L 8002:localhost:8002 root@<remote-instance-IP-address>
+```
+
+Replace `<remote-instance-IP-address>` with the IPv4 address of the remote deploy instance.
+
+The following query will return the processing status of the last epoch as it passes through the different state transitions.
+
+**Check epoch processing status**
+
+Visit `http://localhost:8002/internal/snapshotter/epochProcessingStatus?page=1&size=1` on your browser to know the status of the latest epoch processed by Pooler.
+
+![Pooler Epoch Processing Status Internal API](sample_images/pooler_internal_epoch_status.png)
+
+Most of the project IDs as captured at every state transition should show a status of `success`.
+
+**Check the current epoch on the protocol**
+
+Visit `http://localhost:8002/current_epoch` on your browser to know the current epoch being processed by the protocol. If the `epochId` field from the previous query and this one are too far apart, the deploy setup is most likely 
+
+* running into RPC issues, or 
+* system resource limit issues which causes the host to kill off processes
+
+![Pooler API current epoch](sample_images/pooler_current_epoch.png)
+
+
+6. We have setup a bare-bones consensus dashboard at: [powerloom.network](https://pretest-consensus.powerloom.io/projects/aggregate_24h_stats_lite:9fb408548a732c85604dacb9c956ffc2538a3b895250741593da630d994b1f27:UNISWAPV2). In a 5-10 minutes, your snapshotter address will start show up - use the search box to filter the results.
+
+7. Once all the services are up and running, the front-end can be accessed via [Pooler Frontend](http://localhost:3000) to see a UNISWAPV2 summary data dashboard similar to [PowerLoom UNISWAPV2 Prod](https://uniswapv2.powerloom.io/).
     - A sample screenshot of the dashboard is given [here](./sample_images/pooler-frontend.jpg)
 
     - This will also give an idea in case your snapshotting has fallen behind as you can notice from the time of last snapshot shown in the screenshot.
 
     - Note that the data shown in your own dashboard will not be same as production UI on PowerLoom.io as the "lite mode" is only set to snapshot 7 pair contracts. Refer to contributors section below to enable all pairs.
 
-4. We have setup a bare-bones consensus dashboard at: [powerloom.network](https://pretest-consensus.powerloom.io/projects/aggregate_24h_stats_lite:9fb408548a732c85604dacb9c956ffc2538a3b895250741593da630d994b1f27:UNISWAPV2). In a few minutes, your snapshotter address will start show up - use the search box to filter the results.
 
-5. To shutdown services, just press `Ctrl+C` (and again to force).
+8. To shutdown services, just press `Ctrl+C` (and again to force).
 
     > If you don't keep services running for extended periods of time, this will affect consensus and we may be forced to de-activate your snapshotter account.
     
-6. If you see issues with data, you can do a clean *reset* by running the following command before restarting step 3:
+9. If you see issues with data, you can do a clean *reset* by running the following command before restarting step 3:
 
     `docker-compose --profile ipfs down --volumes`
