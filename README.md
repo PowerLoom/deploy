@@ -30,6 +30,7 @@ Scripts to deploy PowerLoom services ([audit-protocol](https://github.com/PowerL
      - `SLACK_REPORTING_URL`: The URL for reporting to Slack.
      - `POWERLOOM_REPORTING_URL`: The URL for reporting to PowerLoom.
      - `WEB3_STORAGE_TOKEN`: The token for Web3.Storage. You can generate or retrieve this token from your [API tokens page](https://web3.storage/tokens/?create=true) after signing up for a free plan at web3.storage.
+     - `POOLER_API_PREFIX`: To be able to access Pooler frontend  (http://<serverIP>:3000) on a remote instance, add the server IP in format below like this: http://<serverIP>:8002 
 
 2. Run the following command (ideally in a `screen`) and follow instructions
 
