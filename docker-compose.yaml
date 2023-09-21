@@ -36,7 +36,7 @@ services:
       - POWERLOOM_REPORTING_URL=$POWERLOOM_REPORTING_URL
       - WEB3_STORAGE_TOKEN=$WEB3_STORAGE_TOKEN
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:9000/health"]
+      test: ["CMD", "curl", "-f", "http://localhost:9000/health", "||", "exit", "1"]
       interval: 10s
       timeout: 5s
       retries: 3
@@ -73,7 +73,7 @@ services:
       - SLACK_REPORTING_URL=$SLACK_REPORTING_URL
       - POWERLOOM_REPORTING_URL=$POWERLOOM_REPORTING_URL
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8002/health"]
+      test: ["CMD", "curl", "-f", "http://localhost:8002/health", "||", "exit", "1"]
       interval: 10s
       timeout: 5s
       retries: 3

@@ -57,7 +57,7 @@ services:
       - ../pooler/config:/config
       - ./logs/pooler:/logs
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8002/health"]
+      test: ["CMD", "curl", "-f", "http://localhost:8002/health", "||", "exit", "1"]
       interval: 10s
       timeout: 5s
       retries: 3
