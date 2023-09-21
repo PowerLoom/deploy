@@ -19,6 +19,10 @@ services:
     volumes:
       - local_cache:/home/ubuntu/local_cache/
       - ./logs/audit-protocol:/root/.pm2/logs
+    links:
+      - "ipfs"
+      - "redis"
+      - "rabbitmq"
     environment:
       - SIGNER_ACCOUNT_ADDRESS=$SIGNER_ACCOUNT_ADDRESS
       - SIGNER_ACCOUNT_PRIVATE_KEY=$SIGNER_ACCOUNT_PRIVATE_KEY
