@@ -21,7 +21,7 @@ Scripts to deploy PowerLoom services ([audit-protocol](https://github.com/PowerL
 
 2. Copy `env.example` to `.env`.
    - Ensure the following required variables are filled:
-     - `SOURCE_RPC_URL`: The URL for the source RPC (Local node/Infura/Alchemy) service.
+     - `SOURCE_RPC_URL`: The URL for Ethereum RPC (Local node/Infura/Alchemy) service.
      - `SIGNER_ACCOUNT_ADDRESS`: The address of the signer account. This is your whitelisted address on testnet - please file [a ticket](https://discord.com/channels/777248105636560948/1146936525544759457) if you need a new burner wallet registered.
      - `SIGNER_ACCOUNT_PRIVATE_KEY`: The private key corresponding to the signer account address.
 
