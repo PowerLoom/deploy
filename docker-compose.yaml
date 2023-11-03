@@ -100,8 +100,8 @@ services:
       start_period: 20s
 
   redis:
-    command: ["redis-server"]
-    image: "redis"
+    command: redis-server --appendonly yes
+    image: "redis:alpine"
     expose:
       - 6379
     ports:
@@ -112,6 +112,7 @@ services:
       timeout: 5s
       retries: 3
       start_period: 30s
+    restart: on-failure
   rabbitmq:
     image: rabbitmq:3-management
     #command: ["daemon"]
@@ -127,6 +128,7 @@ services:
       timeout: 5s
       retries: 3
       start_period: 30s
+    restart: on-failure
   ipfs:
     image: ipfs/kubo:release
     profiles: ["ipfs"]
@@ -148,5 +150,6 @@ services:
       - 5001
     ports:
       - 5001:5001
+    restart: on-failure
 volumes:
   local_cache:
