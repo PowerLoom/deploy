@@ -2,7 +2,7 @@ version: '3.9'
 
 services:
   audit-protocol:
-    image: ghcr.io/powerloom/audit-protocol:dockerify
+    image: ghcr.io/powerloom/audit-protocol:phase2
     expose:
       - 9000
       - 9002
@@ -46,7 +46,7 @@ services:
       bash -c "sh snapshotter_autofill.sh && sh init_processes.sh"
 
   pooler:
-    image: ghcr.io/powerloom/pooler:dockerify
+    image: ghcr.io/powerloom/pooler:phase2
     depends_on:
       audit-protocol:
         condition: service_healthy
