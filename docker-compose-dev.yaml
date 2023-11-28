@@ -47,9 +47,11 @@ services:
     expose:
       - 8002
       - 8555
+      # - 5678
     ports:
       - 8002:8002
       - 8555:8555
+      # - 5678:5678
     volumes:
       - local_cache:/home/ubuntu/local_cache/
       - ../pooler/pooler:/pooler
