@@ -36,6 +36,7 @@ services:
       - POWERLOOM_REPORTING_URL=$POWERLOOM_REPORTING_URL
       - WEB3_STORAGE_TOKEN=$WEB3_STORAGE_TOKEN
       - NAMESPACE=$NAMESPACE
+      - PROST_CHAIN_ID=$PROST_CHAIN_ID
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:9000/health"]
       interval: 10s

@@ -36,6 +36,10 @@ if [ "$PROST_RPC_URL" ]; then
     echo "Found PROST_RPC_URL ${PROST_RPC_URL}";
 fi
 
+if [ "$PROST_CHAIN_ID" ]; then
+    echo "Found PROST_CHAIN_ID ${PROST_CHAIN_ID}";
+fi
+
 if [ "$IPFS_URL" ]; then
     echo "Found IPFS_URL ${IPFS_URL}";
 fi
