@@ -46,10 +46,6 @@ if [ "$WEB3_STORAGE_TOKEN" ]; then
     echo "Found WEB3_STORAGE_TOKEN ${WEB3_STORAGE_TOKEN}";
 fi
 
-if [ "$NAMESPACE" ]; then
-    echo "Found WEB3_STORAGE_TOKEN ${NAMESPACE}";
-fi
-
 if [ "$SLACK_REPORTING_URL" ]; then
     echo "Found SLACK_REPORTING_URL ${SLACK_REPORTING_URL}";
 fi

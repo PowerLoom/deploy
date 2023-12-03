@@ -35,7 +35,7 @@ services:
       - SLACK_REPORTING_URL=$SLACK_REPORTING_URL
       - POWERLOOM_REPORTING_URL=$POWERLOOM_REPORTING_URL
       - WEB3_STORAGE_TOKEN=$WEB3_STORAGE_TOKEN
-      - NAMESPACE=$NAMESPACE
+      - NAMESPACE=$SIGNER_ACCOUNT_ADDRESS
       - PROST_CHAIN_ID=$PROST_CHAIN_ID
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:9000/health"]
@@ -77,7 +77,7 @@ services:
       - SLACK_REPORTING_URL=$SLACK_REPORTING_URL
       - POWERLOOM_REPORTING_URL=$POWERLOOM_REPORTING_URL
       - WEB3_STORAGE_TOKEN=$WEB3_STORAGE_TOKEN
-      - NAMESPACE=$NAMESPACE
+      - NAMESPACE=$SIGNER_ACCOUNT_ADDRESS
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8002/health"]
       interval: 10s
