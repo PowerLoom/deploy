@@ -10,8 +10,8 @@ Scripts to deploy PowerLoom services ([audit-protocol](https://github.com/PowerL
 3. IPFS node
     - While we have __included__ a node in our autobuild docker setup, IPFS daemon can hog __*a lot*__ of resources - it is not recommended to run this on a personal computer unless you have a strong internet connection and dedicated CPU+RAM.
     - 3rd party IPFS services that provide default IFPS interface like Infura are now supported.
-4. RPC URL for `Ethereum mainnet`. We recommend running a full geth node to save costs and to stick to ethos of decentralization! :)
-> While the current testnet setup defaults to a "lite mode" and works with free RPCs, it's highly recommended to signup with one of these providers to at least track usage even if you aren't on a paid plan: [Alchemy](https://alchemy.com/?r=15ce6db6d0a109d5), [Infura](https://infura.io), [Quicknode](https://www.quicknode.com?tap_a=67226-09396e&tap_s=3491854-f4a458), etc. Please reach out to us if none of the options are viable.
+4. RPC URL for `Zkevm Mainnet`. We recommend running a full geth node to save costs and to stick to ethos of decentralization! :)
+> It's highly recommended to signup with one of these providers to at least track usage even if you aren't on a paid plan: [Alchemy](https://alchemy.com/?r=15ce6db6d0a109d5), [Infura](https://infura.io), [Quicknode](https://www.quicknode.com?tap_a=67226-09396e&tap_s=3491854-f4a458), etc. Please reach out to us if none of the options are viable.
 
 ## For snapshotters
 
@@ -22,7 +22,7 @@ Scripts to deploy PowerLoom services ([audit-protocol](https://github.com/PowerL
 2. Copy `env.example` to `.env`.
    - Ensure the following required variables are filled:
      - `SOURCE_RPC_URL`: The URL for Ethereum RPC (Local node/Infura/Alchemy) service.
-     - `SIGNER_ACCOUNT_ADDRESS`: The address of the signer account. This is your whitelisted address on testnet - please file [a ticket](https://discord.com/channels/777248105636560948/1146936525544759457) if you need a new burner wallet registered.
+     - `SIGNER_ACCOUNT_ADDRESS`: The address of the signer account. This is your whitelisted address on testnet phase2 contract - please file [a ticket](https://discord.com/channels/777248105636560948/1146936525544759457) if you need a new burner wallet registered.
      - `SIGNER_ACCOUNT_PRIVATE_KEY`: The private key corresponding to the signer account address.
 
 3. Open a screen by typing `screen` and then follow instructions by running
@@ -36,7 +36,7 @@ Scripts to deploy PowerLoom services ([audit-protocol](https://github.com/PowerL
     deploy-pooler-1 exited with code 1
     ```
 
-4. Check if all the necessary docker containers are up and running. You should see an output against `docker ps` with the following cotnainers listed:
+4. Check if all the necessary docker containers are up and running. You should see an output against `docker ps` with the following containers listed:
 
     ```
     # docker ps
