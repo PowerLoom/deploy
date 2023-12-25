@@ -17,7 +17,7 @@ Developing your own use case
    
 2. Clone the repository against the testnet branch.
 
- `git clone https://github.com/PowerLoom/deploy.git --single-branch powerloom_deploy --branch eth_india && cd powerloom_deploy`
+ `git clone https://github.com/PowerLoom/deploy.git --single-branch powerloom_deploy --branch main && cd powerloom_deploy`
  
 3. Copy `env.example` to `.env`.
    - Ensure the following required variables are filled:
@@ -51,8 +51,8 @@ Developing your own use case
     If the `.env` is filled up correctly, all services will execute one by one. The logs do fill up quick. So, remember to [safely detach](https://linuxize.com/post/how-to-use-linux-screen/) from screen when not using it. If you see the following error, your snapshotter address is not registered.
 
     ```
-    eth_india-pooler-1           | Snapshotter identity check failed on protocol smart contract
-    eth_india-pooler-1 exited with code 1
+    powerloom_deploy-pooler-1           | Snapshotter identity check failed on protocol smart contract
+    powerloom_deploy-pooler-1 exited with code 1
     ```
 
 5. Check if all the necessary docker containers are up and running. You should see an output against `docker ps` with the following cotnainers listed:
@@ -62,15 +62,15 @@ Developing your own use case
 
     CONTAINER ID   IMAGE                      COMMAND                  CREATED              STATUS                        PORTS                                                                                                         NAMES
 
-    cbeed6b78b1c   powerloom-pooler           "bash -c 'sh snapsho…"   About a minute ago   Up 49 seconds (healthy)       0.0.0.0:8002->8002/tcp, 0.0.0.0:8555->8555/tcp                                                                eth_india-pooler-1
+    cbeed6b78b1c   powerloom-pooler           "bash -c 'sh snapsho…"   About a minute ago   Up 49 seconds (healthy)       0.0.0.0:8002->8002/tcp, 0.0.0.0:8555->8555/tcp                                                                powerloom_deploy-pooler-1
 
-    39773c029247   powerloom-audit-protocol   "bash -c 'sh snapsho…"   About a minute ago   Up About a minute (healthy)   0.0.0.0:9000->9000/tcp, 0.0.0.0:9002->9002/tcp, 0.0.0.0:9030->9030/tcp                                        eth_india-audit-protocol-1
+    39773c029247   powerloom-audit-protocol   "bash -c 'sh snapsho…"   About a minute ago   Up About a minute (healthy)   0.0.0.0:9000->9000/tcp, 0.0.0.0:9002->9002/tcp, 0.0.0.0:9030->9030/tcp                                        powerloom_deploy-audit-protocol-1
 
-    a8e7413cf980   rabbitmq:3-management      "docker-entrypoint.s…"   About a minute ago   Up About a minute (healthy)   4369/tcp, 5671/tcp, 0.0.0.0:5672->5672/tcp, 15671/tcp, 15691-15692/tcp, 25672/tcp, 0.0.0.0:15672->15672/tcp   eth_india-rabbitmq-1
+    a8e7413cf980   rabbitmq:3-management      "docker-entrypoint.s…"   About a minute ago   Up About a minute (healthy)   4369/tcp, 5671/tcp, 0.0.0.0:5672->5672/tcp, 15671/tcp, 15691-15692/tcp, 25672/tcp, 0.0.0.0:15672->15672/tcp   powerloom_deploy-rabbitmq-1
 
-    48c241b1c926   ipfs/kubo:release          "/bin/sh -c ' echo '…"   About a minute ago   Up About a minute (healthy)   4001/tcp, 8080-8081/tcp, 4001/udp, 0.0.0.0:5001->5001/tcp                                                     eth_india-ipfs-1
+    48c241b1c926   ipfs/kubo:release          "/bin/sh -c ' echo '…"   About a minute ago   Up About a minute (healthy)   4001/tcp, 8080-8081/tcp, 4001/udp, 0.0.0.0:5001->5001/tcp                                                     powerloom_deploy-ipfs-1
 
-    64e2213cdcb3   redis:alpine               "docker-entrypoint.s…"   About a minute ago   Up About a minute (healthy)   0.0.0.0:6379->6379/tcp                                                                                        eth_india-redis-1
+    64e2213cdcb3   redis:alpine               "docker-entrypoint.s…"   About a minute ago   Up About a minute (healthy)   0.0.0.0:6379->6379/tcp                                                                                        powerloom_deploy-redis-1
 ```
 
 1. To be sure whether your snapshotter is processing epochs and submitting snapshots for consensus, run the following internal API query on Pooler Core API from your browser.
