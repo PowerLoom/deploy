@@ -54,8 +54,6 @@ if [ "$POWERLOOM_REPORTING_URL" ]; then
     echo "Found SLACK_REPORTING_URL ${POWERLOOM_REPORTING_URL}";
 fi
 
-cd audit-protocol/ && ./build-docker.sh;
-
 cd ../pooler/ && ./build-docker.sh;
 
 cd ../;

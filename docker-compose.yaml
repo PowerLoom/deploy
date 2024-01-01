@@ -1,56 +1,13 @@
 version: '3.9'
 
 services:
-  audit-protocol:
-    image: ghcr.io/powerloom/audit-protocol:latest
-    expose:
-      - 9000
-      - 9002
-      - 9030
-    ports:
-      - 9000:9000
-      - 9002:9002
-      - 9030:9030
+  pooler:
+    image: ghcr.io/powerloom/pooler:latest
     depends_on:
       redis:
          condition: service_healthy
       rabbitmq:
          condition: service_healthy
-    volumes:
-      - local_cache:/home/ubuntu/local_cache/
-      - ./logs/audit-protocol:/root/.pm2/logs
-    links:
-      - "ipfs"
-      - "redis"
-      - "rabbitmq"
-    environment:
-      - SIGNER_ACCOUNT_ADDRESS=$SIGNER_ACCOUNT_ADDRESS
-      - SIGNER_ACCOUNT_PRIVATE_KEY=$SIGNER_ACCOUNT_PRIVATE_KEY
-      - PROST_RPC_URL=$PROST_RPC_URL
-      - IPFS_URL=$IPFS_URL
-      - IPFS_API_KEY=$IPFS_API_KEY
-      - IPFS_API_SECRET=$IPFS_API_SECRET
-      - PROTOCOL_STATE_CONTRACT=$PROTOCOL_STATE_CONTRACT
-      - RELAYER_HOST=$RELAYER_HOST
-      - SLACK_REPORTING_URL=$SLACK_REPORTING_URL
-      - POWERLOOM_REPORTING_URL=$POWERLOOM_REPORTING_URL
-      - WEB3_STORAGE_TOKEN=$WEB3_STORAGE_TOKEN
-      - NAMESPACE=$NAMESPACE
-      - PROST_CHAIN_ID=$PROST_CHAIN_ID
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:9000/health"]
-      interval: 10s
-      timeout: 5s
-      retries: 3
-      start_period: 40s
-    command:
-      bash -c "sh snapshotter_autofill.sh && sh init_processes.sh"
-
-  pooler:
-    image: ghcr.io/powerloom/pooler:latest
-    depends_on:
-      audit-protocol:
-        condition: service_healthy
     links:
       - "ipfs"
       - "redis"
@@ -66,6 +23,8 @@ services:
       - ./logs/pooler:/logs
     environment:
       - SIGNER_ACCOUNT_ADDRESS=$SIGNER_ACCOUNT_ADDRESS
+      - SIGNER_ACCOUNT_PRIVATE_KEY=$SIGNER_ACCOUNT_PRIVATE_KEY
+      - RELAYER_HOST=$RELAYER_HOST
       - SOURCE_RPC_URL=$SOURCE_RPC_URL
       - PROST_RPC_URL=$PROST_RPC_URL
       - IPFS_URL=$IPFS_URL

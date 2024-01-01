@@ -1,5 +1,5 @@
 # PowerLoom Deployment
-Scripts to deploy PowerLoom services ([audit-protocol](https://github.com/PowerLoom/audit-protocol) and [pooler](https://github.com/PowerLoom/pooler)) to [Powerloom Network](https://powerloom.network).
+Scripts to deploy PowerLoom snapshotter node [pooler](https://github.com/PowerLoom/pooler) to [Powerloom Network](https://powerloom.network).
 
 ## Requirements
 
@@ -110,8 +110,6 @@ Building your own use case is easy. Just follow the steps below:
     CONTAINER ID   IMAGE                      COMMAND                  CREATED              STATUS                        PORTS                                                                                                         NAMES
 
     cbeed6b78b1c   powerloom-pooler           "bash -c 'sh snapsho…"   About a minute ago   Up 49 seconds (healthy)       0.0.0.0:8002->8002/tcp, 0.0.0.0:8555->8555/tcp                                                                powerloom_deploy-pooler-1
-
-    39773c029247   powerloom-audit-protocol   "bash -c 'sh snapsho…"   About a minute ago   Up About a minute (healthy)   0.0.0.0:9000->9000/tcp, 0.0.0.0:9002->9002/tcp, 0.0.0.0:9030->9030/tcp                                        powerloom_deploy-audit-protocol-1
 
     a8e7413cf980   rabbitmq:3-management      "docker-entrypoint.s…"   About a minute ago   Up About a minute (healthy)   4369/tcp, 5671/tcp, 0.0.0.0:5672->5672/tcp, 15671/tcp, 15691-15692/tcp, 25672/tcp, 0.0.0.0:15672->15672/tcp   powerloom_deploy-rabbitmq-1
 
