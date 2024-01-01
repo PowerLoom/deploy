@@ -2,7 +2,7 @@ version: '3.9'
 
 services:
   audit-protocol:
-    image: ghcr.io/powerloom/audit-protocol:main
+    image: ghcr.io/powerloom/audit-protocol:latest
     expose:
       - 9000
       - 9002
@@ -47,7 +47,7 @@ services:
       bash -c "sh snapshotter_autofill.sh && sh init_processes.sh"
 
   pooler:
-    image: ghcr.io/powerloom/pooler:zkevm_quests
+    image: ghcr.io/powerloom/pooler:latest
     depends_on:
       audit-protocol:
         condition: service_healthy
