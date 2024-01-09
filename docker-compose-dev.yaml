@@ -1,6 +1,17 @@
 version: '3.9'
 
 services:
+  snapshot-collector:
+    image: powerloom-local-collector
+    expose:
+      - 50051
+    ports:
+      - 50051:50051
+    volumes:
+      - local_cache:/home/ubuntu/local_cache/
+      - ./logs/audit-protocol:/root/.pm2/logs
+    command:
+      bash -c "sh init_processes.sh"
   audit-protocol:
     image: powerloom-audit-protocol
     expose:
@@ -68,6 +79,8 @@ services:
       - ./logs/pooler:/logs
     environment:
       - SIGNER_ACCOUNT_ADDRESS=$SIGNER_ACCOUNT_ADDRESS
+      - SIGNER_ACCOUNT_PRIVATE_KEY=$SIGNER_ACCOUNT_PRIVATE_KEY
+      - RELAYER_HOST=$RELAYER_HOST
       - SOURCE_RPC_URL=$SOURCE_RPC_URL
       - PROST_RPC_URL=$PROST_RPC_URL
       - IPFS_URL=$IPFS_URL

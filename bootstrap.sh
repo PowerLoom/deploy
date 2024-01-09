@@ -2,14 +2,14 @@
 source .env
 echo "cleaning up...";
 rm -rf audit-protocol;
-rm -rf pooler;
-rm -rf logs/pooler/*;
+# rm -rf pooler;
+# rm -rf logs/pooler/*;
 rm -rf logs/audit-protocol/*;
 
 echo "setting up codebase...";
 git clone https://github.com/PowerLoom/audit-protocol.git;
 
-git clone https://github.com/PowerLoom/pooler.git;
+# git clone https://github.com/PowerLoom/pooler.git;
 cd pooler/;
 if [ "$SNAPSHOT_CONFIG_REPO" ]; then
     echo "Found SNAPSHOT_CONFIG_REPO ${SNAPSHOT_CONFIG_REPO}";

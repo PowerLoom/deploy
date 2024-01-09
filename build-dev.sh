@@ -58,6 +58,7 @@ cd audit-protocol/ && ./build-docker.sh;
 
 cd ../pooler/ && ./build-docker.sh;
 
+cd ../proto-snapshot-collector/ && ./build-docker.sh;
 cd ../;
 
 
