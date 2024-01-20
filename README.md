@@ -36,7 +36,7 @@ Scripts to deploy PowerLoom services ([audit-protocol](https://github.com/PowerL
     `./build.sh`
 
 3. Once all the services are up and running, the front-end can be accessed via [Pooler Frontend](http://localhost:3000) to see an AAVE summary data dashboard.
-    - A sample screenshot of the dashboard is given [here](./sample_images/sample-frontend.jpg)
+    - A sample screenshot of the dashboard is given [here](./sample_images/aave-frontend.JPG)
 
     - This will also give an idea in case your snapshotting has fallen behind as you can notice from the time of last snapshot shown in the screenshot.
 
