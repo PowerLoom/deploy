@@ -12,6 +12,12 @@ services:
       - ./logs/audit-protocol:/root/.pm2/logs
     command:
       bash -c "sh init_processes.sh"
+    environment:
+      - IPFS_URL=$IPFS_URL
+      - PROTOCOL_STATE_CONTRACT=$PROTOCOL_STATE_CONTRACT
+      - PROST_RPC_URL=$PROST_RPC_URL
+      - REDIS_HOST=${REDIS_HOST:-redis}
+      - REDIS_PORT=${REDIS_PORT:-6379}
   audit-protocol:
     image: powerloom-audit-protocol
     expose:
