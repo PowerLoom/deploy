@@ -82,18 +82,18 @@ services:
       retries: 3
       start_period: 20s
 
-  # consensus-frontend:
-  #   image: powerloom-offchainconsensus-frontend
-  #   expose:
-  #     - 4173
-  #   ports:
-  #     - 4173:4173
-  #   healthcheck:
-  #     test: ["CMD", "wget", "-qO-", "http://localhost:4173"]
-  #     interval: 10s
-  #     timeout: 5s
-  #     retries: 3
-  #     start_period: 20s
+  consensus-frontend:
+    image: powerloom-offchainconsensus-frontend
+    expose:
+      - 4173
+    ports:
+      - 4173:4173
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:4173"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
 
   redis:
     command: ["redis-server"]
