@@ -9,8 +9,18 @@ rm -rf logs/audit-protocol/*;
 echo "setting up codebase...";
 git clone https://github.com/PowerLoom/audit-protocol.git;
 
+cd audit-protocol/;
+
+git checkout nms_master;
+
+cd ..
+
 git clone https://github.com/PowerLoom/pooler.git;
+
 cd pooler/;
+
+git checkout nms_master;
+
 if [ "$SNAPSHOT_CONFIG_REPO" ]; then
     echo "Found SNAPSHOT_CONFIG_REPO ${SNAPSHOT_CONFIG_REPO}";
     rm -rf config;
