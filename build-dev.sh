@@ -13,6 +13,10 @@ if [ -z "$SIGNER_ACCOUNT_ADDRESS" ]; then
     exit 1;
 fi
 
+if [ -z "$SIGNER_ACCOUNT_PRIVATE_KEY" ]; then
+    echo "SIGNER_ACCOUNT_ADDRESS not found, please set this in your .env!";
+    exit 1;
+fi
 
 echo "Found SOURCE RPC URL ${SOURCE_RPC_URL}";
 
