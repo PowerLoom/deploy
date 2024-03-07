@@ -12,10 +12,7 @@ services:
       - 9002:9002
       - 9030:9030
     depends_on:
-      redis:
-         condition: service_healthy
-      rabbitmq:
-         condition: service_healthy
+      
     volumes:
       - local_cache:/home/ubuntu/local_cache/
       - ./logs/audit-protocol:/root/.pm2/logs
@@ -68,6 +65,9 @@ services:
       - ./logs/pooler:/logs
     environment:
       - SIGNER_ACCOUNT_ADDRESS=$SIGNER_ACCOUNT_ADDRESS
+      - SIGNER_ACCOUNT_PRIVATE_KEY=$SIGNER_ACCOUNT_PRIVATE_KEY
+      - SLOT_ID=$SLOT_ID
+      - RELAYER_HOST=$RELAYER_HOST
       - SOURCE_RPC_URL=$SOURCE_RPC_URL
       - PROST_RPC_URL=$PROST_RPC_URL
       - IPFS_URL=$IPFS_URL
