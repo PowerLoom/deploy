@@ -19,7 +19,7 @@ git clone https://github.com/PowerLoom/pooler.git;
 
 cd pooler/;
 
-git checkout nms_master;
+git checkout devnet_2;
 
 if [ "$SNAPSHOT_CONFIG_REPO" ]; then
     echo "Found SNAPSHOT_CONFIG_REPO ${SNAPSHOT_CONFIG_REPO}";
