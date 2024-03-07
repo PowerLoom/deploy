@@ -12,7 +12,10 @@ services:
       - 9002:9002
       - 9030:9030
     depends_on:
-      
+      redis:
+         condition: service_healthy
+      rabbitmq:
+         condition: service_healthy
     volumes:
       - local_cache:/home/ubuntu/local_cache/
       - ./logs/audit-protocol:/root/.pm2/logs
