@@ -17,7 +17,7 @@ Scripts to deploy PowerLoom services ([audit-protocol](https://github.com/PowerL
 
 Clone the repository against the testnet branch.
 
- `git clone https://github.com/PowerLoom/deploy.git --single-branch devnet --branch main && cd powerloom_deploy`
+ `git clone https://github.com/PowerLoom/deploy.git --single-branch powerloom_deploy --branch devnet && cd powerloom_deploy`
 
 
 ### For Code Contributors
