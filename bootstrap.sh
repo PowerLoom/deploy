@@ -11,7 +11,7 @@ git clone https://github.com/PowerLoom/audit-protocol.git;
 
 cd audit-protocol/;
 
-git checkout nms_master;
+git checkout devnet;
 
 cd ..
 
@@ -19,7 +19,7 @@ git clone https://github.com/PowerLoom/pooler.git;
 
 cd pooler/;
 
-git checkout devnet_2;
+git checkout devnet;
 
 if [ "$SNAPSHOT_CONFIG_REPO" ]; then
     echo "Found SNAPSHOT_CONFIG_REPO ${SNAPSHOT_CONFIG_REPO}";

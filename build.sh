@@ -1,5 +1,4 @@
 #!/bin/bash
-
 source .env
 
 echo "testing before build...";
@@ -15,13 +14,21 @@ if [ -z "$SIGNER_ACCOUNT_ADDRESS" ]; then
 fi
 
 if [ -z "$SIGNER_ACCOUNT_PRIVATE_KEY" ]; then
-    echo "SIGNER_ACCOUNT_ADDRESS not found, please set this in your .env!";
+    echo "SIGNER_ACCOUNT_PRIVATE_KEY not found, please set this in your .env!";
     exit 1;
 fi
+
+if [ -z "$SLOT_ID" ]; then
+    echo "SLOT_ID not found, please set this in your .env!";
+    exit 1;
+fi
+
 
 echo "Found SOURCE RPC URL ${SOURCE_RPC_URL}";
 
 echo "Found SIGNER ACCOUNT ADDRESS ${SIGNER_ACCOUNT_ADDRESS}";
+
+echo "Found SLOT ID ${SLOT_ID}";
 
 if [ "$PROST_RPC_URL" ]; then
     echo "Found PROST_RPC_URL ${PROST_RPC_URL}";
@@ -47,10 +54,6 @@ if [ "$WEB3_STORAGE_TOKEN" ]; then
     echo "Found WEB3_STORAGE_TOKEN ${WEB3_STORAGE_TOKEN}";
 fi
 
-if [ "$NAMESPACE" ]; then
-    echo "Found NAMESPACE ${NAMESPACE}";
-fi
-
 if [ "$SLACK_REPORTING_URL" ]; then
     echo "Found SLACK_REPORTING_URL ${SLACK_REPORTING_URL}";
 fi
@@ -59,22 +62,28 @@ if [ "$POWERLOOM_REPORTING_URL" ]; then
     echo "Found SLACK_REPORTING_URL ${POWERLOOM_REPORTING_URL}";
 fi
 
+cd audit-protocol/ && ./build-docker.sh;
+
+cd ../;
+
+cd pooler/ && ./build-docker.sh;
+
+cd ../;
 
 echo "building...";
 
+
 if ! [ -x "$(command -v docker-compose)" ]; then
     echo 'docker compose not found, trying to see if compose exists within docker';
-    docker compose pull;
     if [ -z "$IPFS_URL" ]; then
-        docker compose --profile ipfs up -V --abort-on-container-exit
+        docker compose -f docker-compose-dev.yaml --profile ipfs up -V --abort-on-container-exit
     else
-        docker compose up --no-deps -V --abort-on-container-exit
+        docker compose -f docker-compose-dev.yaml up --no-deps -V --abort-on-container-exit
     fi
 else
-    docker-compose pull;
     if [ -z "$IPFS_URL" ]; then
-        docker-compose --profile ipfs up -V --abort-on-container-exit
+        docker-compose -f docker-compose-dev.yaml --profile ipfs up -V --abort-on-container-exit
     else
-        docker-compose up --no-deps -V --abort-on-container-exit
+        docker-compose -f docker-compose-dev.yaml up --no-deps -V --abort-on-container-exit
     fi
 fi

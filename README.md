@@ -17,41 +17,7 @@ Scripts to deploy PowerLoom services ([audit-protocol](https://github.com/PowerL
 
 Clone the repository against the testnet branch.
 
- `git clone https://github.com/PowerLoom/deploy.git --single-branch powerloom_deploy --branch main && cd powerloom_deploy`
-
-
-### For snapshotters
-
-1. Copy `env.example` to `.env`.
-   - Ensure the following required variables are filled:
-     - `SOURCE_RPC_URL`: The URL for Ethereum RPC (Local node/Infura/Alchemy) service.
-     - `SIGNER_ACCOUNT_ADDRESS`: The address of the signer account. This is your whitelisted address on the protocol. **Using a burner account is highly recommended**
-     - `SIGNER_ACCOUNT_PRIVATE_KEY`: The private key corresponding to the signer account address.
-   - Optionally, you may also set the following variables:
-     - `PROST_RPC_URL`: The URL for the PROST RPC service.
-     - `PROTOCOL_STATE_CONTRACT`: The contract address for the protocol state.
-     - `RELAYER_HOST`: The host address for the relayer.
-     - `NAMESPACE`: The unique key used to identify your project namespace around which all consensus activity takes place.
-     - `POWERLOOM_REPORTING_URL`: The URL for reporting to PowerLoom.
-     - `PROST_CHAIN_ID`: The chain ID for the PROST RPC service.
-     - `IPFS_URL`: The URL for the IPFS (InterPlanetary File System) service in HTTP(s) (e.g. `https://ipfs.infura.io:5001`) multiaddr format (e.g. `/dns4/ipfs.infura.io/tcp/5001/https`)
-     - `IPFS_API_KEY`: The API key for the IPFS service (if required).
-     - `IPFS_API_SECRET`: The API secret for the IPFS service (if required).
-     - `SLACK_REPORTING_URL`: The URL for reporting to Slack.
-     - `WEB3_STORAGE_TOKEN`: The token for Web3.Storage. You can generate or retrieve this token from your [API tokens page](https://web3.storage/tokens/?create=true) after signing up for a free plan at web3.storage.
-
-2. Run the following command (ideally in a `screen`) and follow instructions
-
-    `./build.sh`
-
-3. Once all the services are up and running, the front-end can be accessed via [Pooler Frontend](https://github.com/PowerLoom/pooler-frontend) to see a UNISWAPV2 summary data dashboard similar to [PowerLoom UNISWAPV2 Prod](https://uniswapv2.powerloom.io/).
-    - A sample screenshot of the dashboard is given [here](./sample_images/pooler-frontend.jpg)
-
-    - This will also give an idea in case your snapshotting has fallen behind as you can notice from the time of last snapshot shown in the screenshot.
-
-    - Note that the data shown in your own dashboard will not be same as production UI on PowerLoom.io as the "lite mode" is only set to snapshot 7 pair contracts. Refer to contributors section below to enable all pairs.
-
-4. We have setup a bare-bones consensus dashboard at: [consensus.powerloom.io](https://onchain-consensus.powerloom.io)
+ `git clone https://github.com/PowerLoom/deploy.git --single-branch devnet --branch main && cd powerloom_deploy`
 
 
 ### For Code Contributors
@@ -60,10 +26,11 @@ Building your own use case is easy. Just follow the steps below:
 
 1. Fork [snapshotter-computes](https://github.com/PowerLoom/snapshotter-computes) and [snapshotter-configs](https://github.com/PowerLoom/snapshotter-configs/) templates
  
-2. Copy `env-dev.example` to `.env`.
+2. Copy `env.example` to `.env`.
    - Ensure the following required variables are filled:
      - `SOURCE_RPC_URL`: The URL for Ethereum RPC (Local node/Infura/Alchemy) service.
      - `SIGNER_ACCOUNT_ADDRESS`: The address of the signer account. This is your whitelisted address on the protocol. **Using a burner account is highly recommended**
+     - `SLOT_ID`: The NFT ID of your minted devnet NFT.
      - `SIGNER_ACCOUNT_PRIVATE_KEY`: The private key corresponding to the signer account address.
      - Configure `SNAPSHOT_CONFIG_REPO` and `SNAPSHOT_CONFIG_REPO_BRANCH` to point to your forked snapshotter-configs repository.
      - Configure `SNAPSHOTTER_COMPUTE_REPO` and `SNAPSHOTTER_COMPUTE_REPO_BRANCH` to point to your forked snapshotter-computes repository.
@@ -87,7 +54,7 @@ Building your own use case is easy. Just follow the steps below:
 4. Open a screen by typing `screen` and then follow instructions by running (if you're not using a server, you can skip starting a screen session)
 
 
-    `./build-dev.sh`
+    `./build.sh`
 
     If the `.env` is filled up correctly, all services will execute one by one. The logs do fill up quick. So, remember to [safely detach](https://linuxize.com/post/how-to-use-linux-screen/) from screen when not using it. 
 
