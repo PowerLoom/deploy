@@ -129,4 +129,4 @@ Visit `http://localhost:8002/current_epoch` on your browser to know the current 
 
 - For Snapshotters: `docker-compose --profile ipfs down --volumes`
 - For Code Contributors: 
-    `docker-compose -f docker-compose-dev.yaml --profile ipfs down --volumes`
+    `docker-compose -f docker-compose.yaml --profile ipfs down --volumes`
