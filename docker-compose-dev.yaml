@@ -3,47 +3,58 @@ version: '3.9'
 services:
   audit-protocol:
     image: powerloom-audit-protocol
-    #build:
-    #  context:
-    #    ../audit-protocol/
     expose:
       - 9000
       - 9002
-    #  - 9030
+      - 9030
     ports:
       - 9000:9000
       - 9002:9002
-    #  - 9030:9030
+      - 9030:9030
     depends_on:
       redis:
          condition: service_healthy
       rabbitmq:
          condition: service_healthy
-    #  - "ipfs"
     volumes:
       - local_cache:/home/ubuntu/local_cache/
+      - ./logs/audit-protocol:/root/.pm2/logs
     links:
-    #  - "ipfs"
+      - "ipfs"
       - "redis"
       - "rabbitmq"
+    environment:
+      - SIGNER_ACCOUNT_ADDRESS=$SIGNER_ACCOUNT_ADDRESS
+      - SIGNER_ACCOUNT_PRIVATE_KEY=$SIGNER_ACCOUNT_PRIVATE_KEY
+      - PROST_RPC_URL=$PROST_RPC_URL
+      - IPFS_URL=$IPFS_URL
+      - IPFS_API_KEY=$IPFS_API_KEY
+      - IPFS_API_SECRET=$IPFS_API_SECRET
+      - PROTOCOL_STATE_CONTRACT=$PROTOCOL_STATE_CONTRACT
+      - RELAYER_HOST=$RELAYER_HOST
+      - SLACK_REPORTING_URL=$SLACK_REPORTING_URL
+      - POWERLOOM_REPORTING_URL=$POWERLOOM_REPORTING_URL
+      - WEB3_STORAGE_TOKEN=$WEB3_STORAGE_TOKEN
+      - NAMESPACE=$NAMESPACE
+      - PROST_CHAIN_ID=$PROST_CHAIN_ID
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:9000/health"]
       interval: 10s
       timeout: 5s
       retries: 3
       start_period: 40s
-
     command:
-      bash -c "sh init_processes.sh"
+      bash -c "sh snapshotter_autofill.sh && sh init_processes.sh"
 
   pooler:
     image: powerloom-pooler
-    #build:
-    #  context:
-    #    ../pooler/
     depends_on:
       audit-protocol:
         condition: service_healthy
+    links:
+      - "ipfs"
+      - "redis"
+      - "rabbitmq"
     expose:
       - 8002
       - 8555
@@ -52,8 +63,21 @@ services:
       - 8555:8555
     volumes:
       - local_cache:/home/ubuntu/local_cache/
-      - ../pooler/pooler:/pooler
-      - ../pooler/config:/config
+      - ./pooler/snapshotter:/snapshotter
+      - ./pooler/config:/config
+      - ./logs/pooler:/logs
+    environment:
+      - SIGNER_ACCOUNT_ADDRESS=$SIGNER_ACCOUNT_ADDRESS
+      - SOURCE_RPC_URL=$SOURCE_RPC_URL
+      - PROST_RPC_URL=$PROST_RPC_URL
+      - IPFS_URL=$IPFS_URL
+      - IPFS_API_KEY=$IPFS_API_KEY
+      - IPFS_API_SECRET=$IPFS_API_SECRET
+      - PROTOCOL_STATE_CONTRACT=$PROTOCOL_STATE_CONTRACT
+      - SLACK_REPORTING_URL=$SLACK_REPORTING_URL
+      - POWERLOOM_REPORTING_URL=$POWERLOOM_REPORTING_URL
+      - WEB3_STORAGE_TOKEN=$WEB3_STORAGE_TOKEN
+      - NAMESPACE=$NAMESPACE
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8002/health"]
       interval: 10s
@@ -61,7 +85,7 @@ services:
       retries: 3
       start_period: 30s
     command:
-      bash -c "sh init_processes.sh"
+      bash -c "sh snapshotter_autofill.sh && sh init_processes.sh"
 
   pooler-frontend:
     image: powerloom-pooler-frontend
@@ -77,19 +101,6 @@ services:
       - 3000:3000
     healthcheck:
       test: ["CMD", "wget", "-qO-", "http://localhost:3000"]
-      interval: 10s
-      timeout: 5s
-      retries: 3
-      start_period: 20s
-
-  consensus-frontend:
-    image: powerloom-offchainconsensus-frontend
-    expose:
-      - 4173
-    ports:
-      - 4173:4173
-    healthcheck:
-      test: ["CMD", "wget", "-qO-", "http://localhost:4173"]
       interval: 10s
       timeout: 5s
       retries: 3
@@ -127,11 +138,24 @@ services:
   ipfs:
     image: ipfs/kubo:release
     profiles: ["ipfs"]
+    environment:
+      - IPFS_PROFILE=server
+    entrypoint: >
+      /bin/sh -c "
+      echo 'adding cronjob';
+      mkdir -p /var/spool/cron/crontabs;
+      croncmd=\"cd /data/ipfs && find . -type f -mtime +7 -name \\"*.data\\" | xargs rm -f 2>&1\";
+      cronjob=\"0 * * * * $$croncmd\";
+      ( crontab -l | grep -v -F \"$$croncmd\" ; echo \"$$cronjob\" ) | crontab -;
+      echo 'starting ipfs';
+      /sbin/tini -- /usr/local/bin/start_ipfs daemon --migrate=true --agent-version-suffix=docker;
+      "
     #command:
     #   ["daemon", "--migrate=true", "--agent-version-suffix=docker"]
     expose:
       - 5001
     ports:
       - 5001:5001
+    restart: on-failure
 volumes:
   local_cache:
