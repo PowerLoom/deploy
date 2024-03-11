@@ -4,18 +4,18 @@ echo "cleaning up...";
 rm -rf audit-protocol;
 rm -rf pooler;
 rm -rf pooler-frontend;
-rm -rf ap-consensus-dashboard;
 rm -rf logs/pooler/*;
 rm -rf logs/audit-protocol/*;
 rm -rf logs/pooler-frontend/*;
-rm -rf logs/ap-consensus-dashboard/*;
-
-echo "setting up codebase...";
-cd ../ && git clone https://github.com/PowerLoom/audit-protocol.git;
 
 # set to clone fork, will update when repos are merged
-git clone https://github.com/Seth-Schmidt/pooler.git;
+echo "setting up codebase...";
+git clone https://github.com/Seth-Schmidt/audit-protocol.git audit-protocol;
+cd audit-protocol/;
+git checkout aave;
+cd ../;
 
+git clone https://github.com/Seth-Schmidt/pooler.git pooler;
 cd pooler/;
 git checkout aave;
 if [ "$SNAPSHOT_CONFIG_REPO" ]; then
@@ -41,17 +41,14 @@ if [ "$SNAPSHOTTER_COMPUTE_REPO" ]; then
         git checkout $SNAPSHOTTER_COMPUTE_REPO_BRANCH;
         cp -n settings/settings_example.json settings/settings.json
     fi
-    cd ../../../../;
+    cd ../../../;
 fi
 
-git clone https://github.com/Seth-Schmidt/pooler-frontend.git;
-cd pooler-frontend/;
-git checkout aave;
+cd ../;
 
-cd ../ && git clone https://github.com/Seth-Schmidt/ap-consensus-dashboard.git;
-cd ap-consensus-dashboard/;
+git clone https://github.com/Seth-Schmidt/pooler-frontend.git pooler-frontend;
+cd pooler-frontend;
 git checkout aave;
-cd ../deploy;
-
+cp -n env.example .env
 
 echo "bootstrapping complete!";
