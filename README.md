@@ -30,24 +30,17 @@ Scripts to deploy PowerLoom services ([audit-protocol](https://github.com/PowerL
      - `POWERLOOM_REPORTING_URL`: The URL for reporting to PowerLoom.
      - `WEB3_STORAGE_TOKEN`: The token for Web3.Storage. You can generate or retrieve this token from your [API tokens page](https://web3.storage/tokens/?create=true) after signing up for a free plan at web3.storage.
 
-3. Run `./bootstrap.sh` to populate the necessary directories.
+2. Run `./bootstrap.sh` to populate the necessary directories.
 
-2. Ensure `settings.json` and other relevant files are populated in proper directories
-    - `../audit-protocol`
-    - `../pooler`
-    - Copy `env.example` to `.env` in `../pooler-frontend`
-    - Copy `env.example` to `.env` in `../ap-consensus-dashboard`
-        - Populate `PUBLIC_RPC` in `../ap-consensus-dashboard/.env` with the URL for the PROST RPC service.
-
-3. Check that `aave` branch is checked out in the necessary directories (Should be handled by `./bootstrap.sh`):
-    - `../pooler-frontend`
-    - `../ap-consensus-frontend`
-    - `../pooler`
-        - ensure that `../pooler/config` and `../pooler/snapshotter/modules/computes` submodules are properly initialized and on the `aave` branch.
+3. Check that the `aave` branch is checked out in the necessary directories (Should be handled by `./bootstrap.sh`):
+    - `pooler-frontend`
+    - `audit-protocol`
+    - `pooler`
+        - ensure that `pooler/config` and `pooler/snapshotter/modules/computes` submodules are properly initialized and on the `aave` branch.
         - Refer to [Pooler Architecture](https://github.com/PowerLoom/pooler?tab=readme-ov-file#architecture) for help with Git Submodules.
         - Refer to [Aave snapshotter-computes](https://github.com/Seth-Schmidt/snapshotter-computes/tree/aave#setup) for setup instructions for the compute module.
 
-4. Run the following command (ideally in a `screen`) and follow instructions
+4. Run the following command (ideally in a `screen`)
 
     `./build-dev.sh`
 
