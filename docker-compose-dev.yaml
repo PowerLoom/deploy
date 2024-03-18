@@ -1,17 +1,106 @@
 version: '3.9'
 
 services:
-  snapshot-collector:
-    image: powerloom-local-collector
+  snapshot-server:
+    image: proto-snapshot-server
+    depends_on:
+      - snapshot-relayer
+      - snapshot-collector
+      - snapshot-validator
     expose:
       - 50051
     ports:
       - 50051:50051
     volumes:
+      - ./shared_data:/shared_data
       - local_cache:/home/ubuntu/local_cache/
-      - ./logs/audit-protocol:/root/.pm2/logs
+    environment:
+      - SIGNER_ACCOUNT_ADDRESS=$SIGNER_ACCOUNT_ADDRESS
+      - SIGNER_ACCOUNT_PRIVATE_KEY=$SIGNER_ACCOUNT_PRIVATE_KEY
+      - IPFS_URL=$IPFS_URL
+      - IPFS_API_KEY=$IPFS_API_KEY
+      - IPFS_API_SECRET=$IPFS_API_SECRET
+      - PROTOCOL_STATE_CONTRACT=$PROTOCOL_STATE_CONTRACT
+      - PROST_RPC_URL=$PROST_RPC_URL
+      - PROST_CHAIN_ID=$PROST_CHAIN_ID
+      - REDIS_HOST=${REDIS_HOST:-redis}
+      - REDIS_PORT=${REDIS_PORT:-6379}
     command:
-      bash -c "sh init_processes.sh"
+      bash -c  "sh init_processes.sh"
+  
+  snapshot-relayer:
+    image: proto-snapshot-relayer
+    expose:
+      - 60051
+    ports:
+      - 60051:60051
+    volumes:
+      - local_cache:/home/ubuntu/local_cache/
+      - ./shared_data:/shared_data
+    environment:
+      - SIGNER_ACCOUNT_ADDRESS=$SIGNER_ACCOUNT_ADDRESS
+      - SIGNER_ACCOUNT_PRIVATE_KEY=$SIGNER_ACCOUNT_PRIVATE_KEY
+      - IPFS_URL=$IPFS_URL
+      - IPFS_API_KEY=$IPFS_API_KEY
+      - IPFS_API_SECRET=$IPFS_API_SECRET
+      - PROTOCOL_STATE_CONTRACT=$PROTOCOL_STATE_CONTRACT
+      - PROST_RPC_URL=$PROST_RPC_URL
+      - PROST_CHAIN_ID=$PROST_CHAIN_ID
+      - REDIS_HOST=${REDIS_HOST:-redis}
+      - REDIS_PORT=${REDIS_PORT:-6379}
+      - RELAYER_ID=$RELAYER_ID
+      - RELAYER_URL=$RELAYER_URL
+    command:
+      bash -c  "sh init_processes.sh"
+
+  snapshot-collector:
+    image: proto-snapshot-collector
+    depends_on:
+      - snapshot-relayer
+    expose:
+      - 4000
+    ports:
+      - 4000:4000
+    volumes:
+      - local_cache:/home/ubuntu/local_cache/
+      - ./shared_data:/shared_data
+    environment:
+      - SIGNER_ACCOUNT_ADDRESS=$SIGNER_ACCOUNT_ADDRESS
+      - SIGNER_ACCOUNT_PRIVATE_KEY=$SIGNER_ACCOUNT_PRIVATE_KEY
+      - IPFS_URL=$IPFS_URL
+      - IPFS_API_KEY=$IPFS_API_KEY
+      - IPFS_API_SECRET=$IPFS_API_SECRET
+      - PROTOCOL_STATE_CONTRACT=$PROTOCOL_STATE_CONTRACT
+      - PROST_RPC_URL=$PROST_RPC_URL
+      - PROST_CHAIN_ID=$PROST_CHAIN_ID
+      - REDIS_HOST=${REDIS_HOST:-redis}
+      - REDIS_PORT=${REDIS_PORT:-6379}
+      - RELAYER_ID=$RELAYER_ID
+      - RELAYER_URL=$RELAYER_URL
+    command:
+      bash -c  "sh collector_autofill.sh && sh init_processes.sh"
+
+  snapshot-validator:
+    image: powerloom-submission-validator
+    volumes:
+      - local_cache:/home/ubuntu/local_cache/
+      - ./shared_data:/shared_data
+    environment:
+      - SIGNER_ACCOUNT_ADDRESS=$SIGNER_ACCOUNT_ADDRESS
+      - SIGNER_ACCOUNT_PRIVATE_KEY=$SIGNER_ACCOUNT_PRIVATE_KEY
+      - IPFS_URL=$IPFS_URL
+      - IPFS_API_KEY=$IPFS_API_KEY
+      - IPFS_API_SECRET=$IPFS_API_SECRET
+      - PROTOCOL_STATE_CONTRACT=$PROTOCOL_STATE_CONTRACT
+      - PROST_RPC_URL=$PROST_RPC_URL
+      - PROST_CHAIN_ID=$PROST_CHAIN_ID
+      - REDIS_HOST=${REDIS_HOST:-redis}
+      - REDIS_PORT=${REDIS_PORT:-6379}
+      - RELAYER_ID=$RELAYER_ID
+      - RELAYER_URL=$RELAYER_URL
+    command:
+      bash -c  "sh validator_autofill.sh && sh init_processes.sh"
+
   audit-protocol:
     image: powerloom-audit-protocol
     expose:
@@ -46,7 +135,7 @@ services:
       - SLACK_REPORTING_URL=$SLACK_REPORTING_URL
       - POWERLOOM_REPORTING_URL=$POWERLOOM_REPORTING_URL
       - WEB3_STORAGE_TOKEN=$WEB3_STORAGE_TOKEN
-      - NAMESPACE=$NAMESPACE
+      - NAMESPACE=$NAMESPACE`
       - PROST_CHAIN_ID=$PROST_CHAIN_ID
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:9000/health"]
