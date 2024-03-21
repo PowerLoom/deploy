@@ -88,7 +88,7 @@ services:
       bash -c "sh snapshotter_autofill.sh && sh init_processes.sh"
 
   redis:
-    command: redis-server --appendonly yes
+    command: redis-server --appendonly yes  --maxclients 10000000
     image: "redis:alpine"
     expose:
       - 6379
