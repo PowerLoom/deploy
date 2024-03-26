@@ -7,16 +7,26 @@ rm -rf audit-protocol;
 rm -rf logs/audit-protocol/*;
 
 echo "setting up codebase...";
+
 git clone https://github.com/PowerLoom/submission-sequencer.git;
+cd submission-sequencer;
+git checkout test_net;
+cd ..;
 
 git clone https://github.com/PowerLoom/submission-relayer.git;
+cd submission-relayer;
+git checkout test_net;
+cd ..;
+
 git clone https://github.com/PowerLoom/proto-snapshot-collector.git;
 cd proto-snapshot-collector;
-git checkout separated_services;
+git checkout test_net;
 cd ..;
 
 git clone https://github.com/PowerLoom/validator-alpha.git;
-git checkout main;
+cd validator-alpha;
+git checkout test_net;
+cd ..;
 git clone https://github.com/PowerLoom/audit-protocol.git;
 
 git clone https://github.com/PowerLoom/pooler.git;
