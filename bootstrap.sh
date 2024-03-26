@@ -13,20 +13,11 @@ cd submission-sequencer;
 git checkout test_net;
 cd ..;
 
-git clone https://github.com/PowerLoom/submission-relayer.git;
-cd submission-relayer;
-git checkout test_net;
-cd ..;
-
-git clone https://github.com/PowerLoom/proto-snapshot-collector.git;
-cd proto-snapshot-collector;
-git checkout test_net;
-cd ..;
-
 git clone https://github.com/PowerLoom/validator-alpha.git;
 cd validator-alpha;
 git checkout test_net;
 cd ..;
+
 git clone https://github.com/PowerLoom/audit-protocol.git;
 
 git clone https://github.com/PowerLoom/pooler.git;
