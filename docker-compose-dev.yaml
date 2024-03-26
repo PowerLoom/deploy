@@ -3,9 +3,6 @@ version: '3.9'
 services:
   snapshot-server:
     image: proto-snapshot-server
-    depends_on:
-      - snapshot-collector
-      - snapshot-validator
     expose:
       - 50051
     ports:
@@ -27,6 +24,7 @@ services:
       - RELAYER_ID=$RELAYER_ID
       - RELAYER_URL=$RELAYER_URL
       - COLLECTOR_ID=$COLLECTOR_ID
+      - BLOCK_TIME=$BLOCK_TIME
     command:
       bash -c  "sh init_processes.sh"
   
