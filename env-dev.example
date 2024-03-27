@@ -10,7 +10,7 @@ POOLER_BRANCH=base-uniswapv2
 PROST_RPC_URL=https://rpc-prost-1h-sv2cc82c3x.t.conduit.xyz
 PROTOCOL_STATE_CONTRACT=
 RELAYER_HOST=https://relayer-devnet-1d.powerloom.dev
-NAMESPACE=BASEUNISWAPV2
+NAMESPACE=UNISWAPV2
 PROST_CHAIN_ID=11165
 # Optional
 POWERLOOM_REPORTING_URL=
