@@ -26,8 +26,8 @@ services:
       - COLLECTOR_ID=$COLLECTOR_ID
       - BLOCK_TIME=$BLOCK_TIME
     command:
-      bash -c  "sh server_autofill && sh init_processes.sh"
-      
+      bash -c  "sh server_autofill.sh && sh init_processes.sh"
+
   snapshot-validator:
     image: powerloom-submission-validator
     volumes:
