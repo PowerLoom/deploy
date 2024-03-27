@@ -23,17 +23,12 @@ echo "Found SOURCE RPC URL ${SOURCE_RPC_URL}";
 
 echo "Found SIGNER ACCOUNT ADDRESS ${SIGNER_ACCOUNT_ADDRESS}";
 
-if [ "$CODESPACE_NAME" ]; then
-    export POOLER_API_PREFIX="https://${CODESPACE_NAME}-8002.${GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN}";
-    echo "Running in Github codespace, autofilling POOLER_API_PREFIX..";
-fi
-
-if [ "$POOLER_API_PREFIX" ]; then
-    echo "Found POOLER_API_PREFIX ${POOLER_API_PREFIX}";
-fi
-
 if [ "$PROST_RPC_URL" ]; then
     echo "Found PROST_RPC_URL ${PROST_RPC_URL}";
+fi
+
+if [ "$PROST_CHAIN_ID" ]; then
+    echo "Found PROST_CHAIN_ID ${PROST_CHAIN_ID}";
 fi
 
 if [ "$IPFS_URL" ]; then
@@ -50,6 +45,10 @@ fi
 
 if [ "$WEB3_STORAGE_TOKEN" ]; then
     echo "Found WEB3_STORAGE_TOKEN ${WEB3_STORAGE_TOKEN}";
+fi
+
+if [ "$NAMESPACE" ]; then
+    echo "Found NAMESPACE ${NAMESPACE}";
 fi
 
 if [ "$SLACK_REPORTING_URL" ]; then

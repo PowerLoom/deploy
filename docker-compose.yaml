@@ -18,6 +18,7 @@ services:
          condition: service_healthy
     volumes:
       - local_cache:/home/ubuntu/local_cache/
+      - ./logs/audit-protocol:/root/.pm2/logs
     links:
       - "ipfs"
       - "redis"
@@ -34,6 +35,8 @@ services:
       - SLACK_REPORTING_URL=$SLACK_REPORTING_URL
       - POWERLOOM_REPORTING_URL=$POWERLOOM_REPORTING_URL
       - WEB3_STORAGE_TOKEN=$WEB3_STORAGE_TOKEN
+      - NAMESPACE=$NAMESPACE
+      - PROST_CHAIN_ID=$PROST_CHAIN_ID
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:9000/health"]
       interval: 10s
@@ -60,6 +63,7 @@ services:
       - 8555:8555
     volumes:
       - local_cache:/home/ubuntu/local_cache/
+      - ./logs/pooler:/logs
     environment:
       - SIGNER_ACCOUNT_ADDRESS=$SIGNER_ACCOUNT_ADDRESS
       - SOURCE_RPC_URL=$SOURCE_RPC_URL
@@ -70,6 +74,8 @@ services:
       - PROTOCOL_STATE_CONTRACT=$PROTOCOL_STATE_CONTRACT
       - SLACK_REPORTING_URL=$SLACK_REPORTING_URL
       - POWERLOOM_REPORTING_URL=$POWERLOOM_REPORTING_URL
+      - WEB3_STORAGE_TOKEN=$WEB3_STORAGE_TOKEN
+      - NAMESPACE=$NAMESPACE
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8002/health"]
       interval: 10s
@@ -79,27 +85,9 @@ services:
     command:
       bash -c "sh snapshotter_autofill.sh && sh init_processes.sh"
 
-  pooler-frontend:
-    image: ghcr.io/powerloom/pooler-frontend:latest
-    depends_on:
-      pooler:
-        condition: service_healthy
-    expose:
-      - 3000
-    ports:
-      - 3000:3000
-    environment:
-      - POOLER_API_PREFIX=$POOLER_API_PREFIX
-    healthcheck:
-      test: ["CMD", "wget", "-qO-","http://localhost:3000"]
-      interval: 10s
-      timeout: 5s
-      retries: 3
-      start_period: 20s
-
   redis:
-    command: ["redis-server"]
-    image: "redis"
+    command: redis-server --appendonly yes --maxclients 10000000
+    image: "redis:alpine"
     expose:
       - 6379
     ports:
@@ -110,6 +98,7 @@ services:
       timeout: 5s
       retries: 3
       start_period: 30s
+    restart: on-failure
   rabbitmq:
     image: rabbitmq:3-management
     #command: ["daemon"]
@@ -125,6 +114,7 @@ services:
       timeout: 5s
       retries: 3
       start_period: 30s
+    restart: on-failure
   ipfs:
     image: ipfs/kubo:release
     profiles: ["ipfs"]
@@ -146,5 +136,6 @@ services:
       - 5001
     ports:
       - 5001:5001
+    restart: on-failure
 volumes:
   local_cache:
