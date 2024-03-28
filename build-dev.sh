@@ -56,13 +56,13 @@ fi
 
 #Make sure the repos mentioned in comments are cloned in the parent directory of this repo
 
-# git clone https://github.com/Seth-Schmidt/audit-protocol.git;
+# git clone https://github.com/Powerloom/audit-protocol.git;
 cd audit-protocol/ && ./build-docker.sh;
 
-#cd ../ && git clone https://github.com/Seth-Schmidt/pooler.git;
+#cd ../ && git clone https://github.com/Powerloom/pooler.git;
 cd ../pooler/ && ./build-docker.sh;
 
-# cd ../ && git clone https://github.com/Seth-Schmidt/pooler-frontend.git;
+# cd ../ && git clone https://github.com/Powerloom/pooler-frontend.git;
 cd ../pooler-frontend/ && ./build-docker.sh;
 
 cd ../;

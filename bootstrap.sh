@@ -3,21 +3,18 @@ source .env
 echo "cleaning up...";
 rm -rf audit-protocol;
 rm -rf pooler;
-rm -rf pooler-frontend;
 rm -rf logs/pooler/*;
 rm -rf logs/audit-protocol/*;
-rm -rf logs/pooler-frontend/*;
 
-# set to clone fork, will update when repos are merged
 echo "setting up codebase...";
-git clone https://github.com/Seth-Schmidt/audit-protocol.git audit-protocol;
+git clone https://github.com/PowerLoom/audit-protocol.git audit-protocol;
 cd audit-protocol/;
-git checkout aave;
+git checkout nms_master;
 cd ../;
 
-git clone https://github.com/Seth-Schmidt/pooler.git pooler;
+git clone https://github.com/PowerLoom/pooler.git pooler;
 cd pooler/;
-git checkout aave;
+git checkout nms_master;
 if [ "$SNAPSHOT_CONFIG_REPO" ]; then
     echo "Found SNAPSHOT_CONFIG_REPO ${SNAPSHOT_CONFIG_REPO}";
     rm -rf config;
@@ -39,16 +36,10 @@ if [ "$SNAPSHOTTER_COMPUTE_REPO" ]; then
     if [ "$SNAPSHOTTER_COMPUTE_REPO_BRANCH" ]; then
         echo "Found SNAPSHOTTER_COMPUTE_REPO_BRANCH ${SNAPSHOTTER_COMPUTE_REPO_BRANCH}";
         git checkout $SNAPSHOTTER_COMPUTE_REPO_BRANCH;
-        cp -n settings/settings_example.json settings/settings.json
     fi
     cd ../../../;
 fi
 
 cd ../;
-
-git clone https://github.com/Seth-Schmidt/pooler-frontend.git pooler-frontend;
-cd pooler-frontend;
-git checkout aave;
-cp -n env.example .env
 
 echo "bootstrapping complete!";

@@ -3,12 +3,12 @@ SOURCE_RPC_URL=
 SIGNER_ACCOUNT_ADDRESS=
 SIGNER_ACCOUNT_PRIVATE_KEY=
 SLOT_ID=
-SNAPSHOT_CONFIG_REPO=https://github.com/Seth-Schmidt/snapshotter-configs
+SNAPSHOT_CONFIG_REPO=https://github.com/PowerLoom/snapshotter-configs.git
 SNAPSHOT_CONFIG_REPO_BRANCH=aave
-SNAPSHOTTER_COMPUTE_REPO=https://github.com/Seth-Schmidt/snapshotter-computes
+SNAPSHOTTER_COMPUTE_REPO=https://github.com/PowerLoom/snapshotter-computes.git
 SNAPSHOTTER_COMPUTE_REPO_BRANCH=aave
 PROST_RPC_URL=https://rpc-prost-1h-sv2cc82c3x.t.conduit.xyz
-PROTOCOL_STATE_CONTRACT=0x24952DA7F22535d641ed44A6d289e38166fa7EC3
+PROTOCOL_STATE_CONTRACT=0xa71Bb0F24744E86a4ABe3C97bA8dd762A5313ADD
 NAMESPACE=aavev3
 PROST_CHAIN_ID=11165
 # Optional

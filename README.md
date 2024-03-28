@@ -38,7 +38,7 @@ Scripts to deploy PowerLoom services ([audit-protocol](https://github.com/PowerL
     - `pooler`
         - ensure that `pooler/config` and `pooler/snapshotter/modules/computes` submodules are properly initialized and on the `aave` branch.
         - Refer to [Pooler Architecture](https://github.com/PowerLoom/pooler?tab=readme-ov-file#architecture) for help with Git Submodules.
-        - Refer to [Aave snapshotter-computes](https://github.com/Seth-Schmidt/snapshotter-computes/tree/aave#setup) for setup instructions for the compute module.
+        - Refer to [Aave snapshotter-computes](https://github.com/Powerloom/snapshotter-computes/tree/aave?tab=readme-ov-file#overview) for setup instructions for the compute module.
 
 4. Run the following command (ideally in a `screen`)
 
@@ -49,7 +49,7 @@ Scripts to deploy PowerLoom services ([audit-protocol](https://github.com/PowerL
 
     - This will also give an idea in case your snapshotting has fallen behind as you can notice from the time of last snapshot shown in the screenshot.
 
-    - The configuration is set to snapshot all Aave assets by default. Refer to [Aave snapshotter-computes](https://github.com/Seth-Schmidt/snapshotter-computes/tree/aave#setup) to change which assets are snapshotted.
+    - The configuration is set to snapshot all Aave assets by default. Refer to [Aave snapshotter-computes](https://github.com/Powerloom/snapshotter-computes/tree/aave?tab=readme-ov-file#configuration) to change which assets are snapshotted.
 
 6. To shutdown services, just press `Ctrl+C` (and again to force).
 

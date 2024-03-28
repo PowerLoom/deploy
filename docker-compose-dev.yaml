@@ -87,25 +87,6 @@ services:
     command:
       bash -c "sh snapshotter_autofill.sh && sh init_processes.sh"
 
-  pooler-frontend:
-    image: powerloom-pooler-frontend
-    #build:
-    #  context:
-    #    ../pooler-frontend/
-    depends_on:
-      pooler:
-        condition: service_healthy
-    expose:
-      - 3000
-    ports:
-      - 3000:3000
-    healthcheck:
-      test: ["CMD", "wget", "-qO-", "http://localhost:3000"]
-      interval: 10s
-      timeout: 5s
-      retries: 3
-      start_period: 20s
-
   redis:
     command: ["redis-server"]
     image: "redis"
