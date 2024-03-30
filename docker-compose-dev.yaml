@@ -43,6 +43,7 @@ services:
       - PROST_CHAIN_ID=$PROST_CHAIN_ID
       - REDIS_HOST=${REDIS_HOST:-redis}
       - REDIS_PORT=${REDIS_PORT:-6379}
+      - BLOCK_TIME=$BLOCK_TIME
     command:
       bash -c  "sh validator_autofill.sh && sh init_processes.sh"
 
