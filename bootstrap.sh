@@ -10,7 +10,7 @@ echo "setting up codebase...";
 
 git clone https://github.com/PowerLoom/submission-sequencer.git;
 cd submission-sequencer;
-git checkout redis_improvements;
+git checkout relayer_broadcast;
 cd ..;
 
 git clone https://github.com/PowerLoom/validator-alpha.git;
