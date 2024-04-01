@@ -34,7 +34,7 @@ Clone the repository against the testnet branch.
      - `NAMESPACE`: The unique key used to identify your project namespace around which all consensus activity takes place.
      - `POWERLOOM_REPORTING_URL`: The URL for reporting to PowerLoom.
      - `PROST_CHAIN_ID`: The chain ID for the PROST RPC service.
-     - `IPFS_URL`: The URL for the IPFS (InterPlanetary File System) service in HTTP(s) (e.g. `https://ipfs.infura.io:5001`) multiaddr format (e.g. `/dns4/ipfs.infura.io/tcp/5001/https`)
+     - `IPFS_URL`: The URL for the IPFS (InterPlanetary File System) service in HTTP(s) (e.g. `https://ipfs.infura.io:5001`) multiaddr format (e.g. `/dns/ipfs.infura.io/tcp/5001/https`)
      - `IPFS_API_KEY`: The API key for the IPFS service (if required).
      - `IPFS_API_SECRET`: The API secret for the IPFS service (if required).
      - `SLACK_REPORTING_URL`: The URL for reporting to Slack.
@@ -74,7 +74,7 @@ Building your own use case is easy. Just follow the steps below:
      - `NAMESPACE`: The unique key used to identify your project namespace around which all consensus activity takes place.
      - `POWERLOOM_REPORTING_URL`: The URL for reporting to PowerLoom.
      - `PROST_CHAIN_ID`: The chain ID for the PROST RPC service.
-     - `IPFS_URL`: The URL for the IPFS (InterPlanetary File System) service in HTTP(s) (e.g. `https://ipfs.infura.io:5001`) multiaddr format (e.g. `/dns4/ipfs.infura.io/tcp/5001/https`)
+     - `IPFS_URL`: The URL for the IPFS (InterPlanetary File System) service in HTTP(s) (e.g. `https://ipfs.infura.io:5001`) multiaddr format (e.g. `/dns/ipfs.infura.io/tcp/5001/https`)
      - `IPFS_API_KEY`: The API key for the IPFS service (if required).
      - `IPFS_API_SECRET`: The API secret for the IPFS service (if required).
      - `SLACK_REPORTING_URL`: The URL for reporting to Slack.
