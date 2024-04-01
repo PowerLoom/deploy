@@ -124,7 +124,7 @@ Building your own use case is easy. Just follow the steps below:
 
 > For detailed documentation on internal APIs and the low level details exposed by them, refer to the Pooler docs.
 
-**Tunnel from your local machine to the remote deploy instance on the [`core_api`](https://github.com/PowerLoom/pooler/blob/phase2/README.md#core-api) port**
+**Tunnel from your local machine to the remote deploy instance on the [`core_api`](https://github.com/PowerLoom/pooler/tree/nms_master?tab=readme-ov-file#core-api) port**
 
 This opens up port 8002.
 
