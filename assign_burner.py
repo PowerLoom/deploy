@@ -29,21 +29,26 @@ def assign_burner_wallet():
     contract = w3.eth.contract(address=contract_address, abi=ABI)
 
     burner_wallet = contract.functions.slotSnapshotterMapping(int(slot_id)).call()
-    if burner_wallet == "0x" + "0" * 40:
-        print(f"Slot {slot_id} is not assigned to any burner wallet.")
-        assign_burner = input("Do you want to assign a burner wallet to a slot? (yes/no): ")
-    else:
-        print(f"Slot {slot_id} is already assigned to burner wallet {burner_wallet}")
-        if burner_wallet.lower() == signer_account_address.lower():
-            print("Burner wallet matches with the signer account address, continuing...")
-            sys.exit(0)
-        else:
-            print("Burner wallet does not match with the signer account address.")
+    while True:
+        if burner_wallet == "0x" + "0" * 40:
+            print(f"Slot {slot_id} is not assigned to any burner wallet.")
             assign_burner = input("Do you want to assign a burner wallet to a slot? (yes/no): ")
-
-    if assign_burner == "no":
-        print("Nothing to do. Continuing...")
-        sys.exit(0)
+            if assign_burner != "yes":
+                print("Cannot proceed without assigning a burner wallet.")
+                sys.exit(1)
+            else:
+                break
+        else:
+            print(f"Slot {slot_id} is already assigned to burner wallet {burner_wallet}")
+            if burner_wallet.lower() == signer_account_address.lower():
+                print("Burner wallet matches with the signer account address, continuing...")
+                sys.exit(0)
+            else:
+                print("Burner wallet does not match with the signer account address.")
+                assign_burner = input("Do you want to assign a burner wallet to a slot? (yes/no): ")
+                if assign_burner != "yes":
+                    print("Cannot proceed with a different burner wallet.")
+                    sys.exit(1)
 
     print("To assign a burner wallet to a slot, you need to sign a message with the private key of the signer account.")
     private_key = getpass("Private Key: ")
