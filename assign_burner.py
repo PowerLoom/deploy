@@ -33,11 +33,14 @@ def assign_burner_wallet():
         if burner_wallet == "0x" + "0" * 40:
             print(f"Slot {slot_id} is not assigned to any burner wallet.")
             assign_burner = input("Do you want to assign a burner wallet to a slot? (yes/no): ")
-            if assign_burner != "yes":
+
+            if assign_burner == "no":
                 print("Cannot proceed without assigning a burner wallet.")
                 sys.exit(1)
-            else:
+            elif assign_burner == "yes":
                 break
+            else:
+                continue
         else:
             print(f"Slot {slot_id} is already assigned to burner wallet {burner_wallet}")
             if burner_wallet.lower() == signer_account_address.lower():
@@ -46,9 +49,14 @@ def assign_burner_wallet():
             else:
                 print("Burner wallet does not match with the signer account address.")
                 assign_burner = input("Do you want to assign a burner wallet to a slot? (yes/no): ")
-                if assign_burner != "yes":
+
+                if assign_burner == "yes":
+                    break
+                elif assign_burner == "no":
                     print("Cannot proceed with a different burner wallet.")
                     sys.exit(1)
+                else:
+                    continue
 
     print("To assign a burner wallet to a slot, you need to sign a message with the private key of the Account holding the slot.")
     private_key = getpass("Private Key: ")
