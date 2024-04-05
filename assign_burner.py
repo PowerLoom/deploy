@@ -50,7 +50,7 @@ def assign_burner_wallet():
                     print("Cannot proceed with a different burner wallet.")
                     sys.exit(1)
 
-    print("To assign a burner wallet to a slot, you need to sign a message with the private key of the signer account.")
+    print("To assign a burner wallet to a slot, you need to sign a message with the private key of the Account holding the slot.")
     private_key = getpass("Private Key: ")
 
     message = encode_defunct(text=f'Assign Burner Wallet to Slot {slot_id}')
