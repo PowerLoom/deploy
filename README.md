@@ -4,11 +4,12 @@ Scripts to deploy PowerLoom services ([audit-protocol](https://github.com/PowerL
 ## Requirements
 
 1. Latest version of `docker` (`>= 20.10.21`) and `docker-compose` (`>= v2.13.0`)
-2. At least 4 core CPU, 8GB RAM and 50GB SSD - make sure to choose the correct spec when deploying to Github Codespaces.
-3. IPFS node
+2. Python 3.8 or higher
+3. At least 4 core CPU, 8GB RAM and 50GB SSD - make sure to choose the correct spec when deploying to Github Codespaces.
+4. IPFS node
     - While we have __included__ a node in our autobuild docker setup, IPFS daemon can hog __*a lot*__ of resources - it is not recommended to run this on a personal computer unless you have a strong internet connection and dedicated CPU+RAM.
     - 3rd party IPFS services that provide default IFPS interface like Infura are now supported.
-4. RPC URL for `Ethereum mainnet` or the chain you're working on. We recommend running a full node to save costs and to stick to ethos of decentralization! :)
+5. RPC URL for `Ethereum mainnet` or the chain you're working on. We recommend running a full node to save costs and to stick to ethos of decentralization! :)
 > While the current testnet setup defaults to a "lite mode" and works with free RPCs, it's highly recommended to signup with one of these providers to at least track usage even if you aren't on a paid plan: [Alchemy](https://alchemy.com/?r=15ce6db6d0a109d5), [Infura](https://infura.io), [Quicknode](https://www.quicknode.com?tap_a=67226-09396e&tap_s=3491854-f4a458), etc. Please reach out to us if none of the options are viable.
 
 
@@ -51,7 +52,9 @@ Building your own use case is easy. Just follow the steps below:
    
    **Note**- This is a one time step and resets the codebase to the latest version of the branch. If you have made any changes to the codebase, make sure to commit them before running this command.You need to run this command only once after cloning the repository.
 
-4. Open a screen by typing `screen` and then follow instructions by running (if you're not using a server, you can skip starting a screen session)
+4. Install required dependencies for python scripts by running `pip install -r requirements.txt` command.
+
+5. Open a screen by typing `screen` and then follow instructions by running (if you're not using a server, you can skip starting a screen session)
 
 
     `./build.sh`
