@@ -14,7 +14,7 @@ if [ -z "$SIGNER_ACCOUNT_ADDRESS" ]; then
 fi
 
 if [ -z "$SIGNER_ACCOUNT_PRIVATE_KEY" ]; then
-    echo "SIGNER_ACCOUNT_ADDRESS not found, please set this in your .env!";
+    echo "SIGNER_ACCOUNT_PRIVATE_KEY not found, please set this in your .env!";
     exit 1;
 fi
 
