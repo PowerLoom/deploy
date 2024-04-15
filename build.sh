@@ -72,7 +72,7 @@ cd ../;
 
 echo "handling burner assignment...";
 
-python assign_burner.py || exit 1;
+python3 assign_burner.py || exit 1;
 
 echo "building...";
 
