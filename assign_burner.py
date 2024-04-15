@@ -65,25 +65,40 @@ def assign_burner_wallet():
     signed_message = Account.sign_message(message, private_key=private_key)
 
     url = "https://devnet-reg-api.powerloom.dev/assignBurnerWallet"
-    payload = {
-        "address": signer_account_address,
-        "slotId": slot_id,
-        "signature": signed_message.signature.hex(),
-        "contractAddress": contract_address
-    }
 
-    try:
-        response = requests.post(url, json=payload)
-        print("Response:", response.json())
-        response.raise_for_status()
-        if response.json().get('info', {}).get('success'):
-            print("Burner wallet assigned successfully.")
-        else:
-            print("Error assigning burner wallet to slot.")
+    # TODO: keep this list updated as new protocol state contracts are added to devnet
+    contract_addresses = [
+        '0x573906E80C30dA608E3a24A0938BCB3f0C68Ed2f',
+        '0x12e11e7327d1A35CbB8B9116382D4c80bBbd66FF',
+        '0x3a201ee51C24f399E8Eb914A9609BC7Bb79D593B',
+        '0x6fa98eD982d7c6c27E2181778905D1F26D110c95'
+    ]
+    responses = []
+    for contract_address in contract_addresses:
+        payload = {
+            "address": signer_account_address,
+            "slotId": slot_id,
+            "signature": signed_message.signature.hex(),
+            "contractAddress": contract_address
+        }
+
+        try:
+            response = requests.post(url, json=payload)
+            responses.append(response)
+            response.raise_for_status()
+            if not response.json().get('info', {}).get('success'):
+                print("Error assigning burner wallet to slot.")
+                sys.exit(1)
+        except requests.RequestException as e:
+            print(f"Error communicating with registration server: {e}")
             sys.exit(1)
-    except requests.RequestException as e:
-        print(f"Error communicating with registration server: {e}")
-        sys.exit(1)
+
+    for response in responses:
+        if response.status_code != 200:
+            print(f"Error assigning burner wallet to slot: {response.text}")
+            sys.exit(1)
+
+    print("Burner wallet assigned successfully.")
 
 if __name__ == '__main__':
     assign_burner_wallet()
