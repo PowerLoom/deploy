@@ -8,7 +8,6 @@ services:
     ports:
       - 50051:50051
     volumes:
-      - ./shared_data:/shared_data
       - local_cache:/home/ubuntu/local_cache/
     environment:
       - SIGNER_ACCOUNT_ADDRESS=$SIGNER_ACCOUNT_ADDRESS
@@ -21,7 +20,6 @@ services:
       - PROST_CHAIN_ID=$PROST_CHAIN_ID
       - REDIS_HOST=${REDIS_HOST:-redis}
       - REDIS_PORT=${REDIS_PORT:-6379}
-      - RENDEZVOUS_POINT=$RENDEZVOUS_POINT
       - SEQUENCER_ID=$SEQUENCER_ID
       - RENDEZVOUS_POINT=$RENDEZVOUS_POINT
       - BLOCK_TIME=$BLOCK_TIME
