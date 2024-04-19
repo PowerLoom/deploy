@@ -21,9 +21,9 @@ services:
       - PROST_CHAIN_ID=$PROST_CHAIN_ID
       - REDIS_HOST=${REDIS_HOST:-redis}
       - REDIS_PORT=${REDIS_PORT:-6379}
-      - RELAYER_ID=$RELAYER_ID
-      - RELAYER_URL=$RELAYER_URL
+      - RENDEZVOUS_POINT=$RENDEZVOUS_POINT
       - COLLECTOR_ID=$COLLECTOR_ID
+      - RENDEZVOUS_POINT=$RENDEZVOUS_POINT
       - BLOCK_TIME=$BLOCK_TIME
     command:
       bash -c  "sh server_autofill.sh && sh init_processes.sh"

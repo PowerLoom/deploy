@@ -8,21 +8,24 @@ rm -rf logs/audit-protocol/*;
 
 echo "setting up codebase...";
 
+rm -rf submission-sequencer;
 git clone https://github.com/PowerLoom/submission-sequencer.git;
 cd submission-sequencer;
-git checkout relayer_broadcast;
+git checkout code_cleanup;
 cd ..;
 
+rm -rf validator-alpha;
 git clone https://github.com/PowerLoom/validator-alpha.git;
 cd validator-alpha;
-git checkout redis_improvements;
+git checkout gas_fee_legacy;
 cd ..;
 
 git clone https://github.com/PowerLoom/audit-protocol.git;
 
+rm -rf pooler;
 git clone https://github.com/PowerLoom/pooler.git;
 cd pooler/;
-git checkout feat/proto_submissions;
+git checkout feat/proto_submission_nms;
 if [ "$SNAPSHOT_CONFIG_REPO" ]; then
     echo "Found SNAPSHOT_CONFIG_REPO ${SNAPSHOT_CONFIG_REPO}";
     rm -rf config;
