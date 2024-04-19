@@ -17,7 +17,7 @@ Scripts to deploy PowerLoom services ([audit-protocol](https://github.com/PowerL
 
 Clone the repository against the testnet branch.
 
- `git clone https://github.com/PowerLoom/deploy.git --single-branch powerloom_deploy --branch main && cd powerloom_deploy`
+ `git clone https://github.com/PowerLoom/deploy.git --single-branch powerloom_deploy --branch feat/proto_snapshot_collector && cd powerloom_deploy`
 
 
 ### For snapshotters
@@ -27,6 +27,9 @@ Clone the repository against the testnet branch.
      - `SOURCE_RPC_URL`: The URL for Ethereum RPC (Local node/Infura/Alchemy) service.
      - `SIGNER_ACCOUNT_ADDRESS`: The address of the signer account. This is your whitelisted address on the protocol. **Using a burner account is highly recommended**
      - `SIGNER_ACCOUNT_PRIVATE_KEY`: The private key corresponding to the signer account address.
+     - `SEQUENCER_ID`: The peer ID of the snapshot sequencer which is where all snapshots are submitted.
+     - `RENDEZVOUS_POINT`: The identifier for locating all relayer peers which are the only way to access the sequencer and submit snapshots.
+
    - Optionally, you may also set the following variables:
      - `PROST_RPC_URL`: The URL for the PROST RPC service.
      - `PROTOCOL_STATE_CONTRACT`: The contract address for the protocol state.
@@ -42,7 +45,7 @@ Clone the repository against the testnet branch.
 
 2. Run the following command (ideally in a `screen`) and follow instructions
 
-    `./build.sh`
+    `./build-dev.sh`
 
 3. Once all the services are up and running, the front-end can be accessed via [Pooler Frontend](https://github.com/PowerLoom/pooler-frontend) to see a UNISWAPV2 summary data dashboard similar to [PowerLoom UNISWAPV2 Prod](https://uniswapv2.powerloom.io/).
     - A sample screenshot of the dashboard is given [here](./sample_images/pooler-frontend.jpg)
@@ -67,6 +70,9 @@ Building your own use case is easy. Just follow the steps below:
      - `SIGNER_ACCOUNT_PRIVATE_KEY`: The private key corresponding to the signer account address.
      - Configure `SNAPSHOT_CONFIG_REPO` and `SNAPSHOT_CONFIG_REPO_BRANCH` to point to your forked snapshotter-configs repository.
      - Configure `SNAPSHOTTER_COMPUTE_REPO` and `SNAPSHOTTER_COMPUTE_REPO_BRANCH` to point to your forked snapshotter-computes repository.
+     - `SEQUENCER_ID`: The peer ID of the snapshot sequencer which is where all snapshots are submitted.
+     - `RENDEZVOUS_POINT`: The identifier for locating all relayer peers which are the only way to access the sequencer and submit snapshots.
+
    - Optionally, you may also set the following variables:
      - `PROST_RPC_URL`: The URL for the PROST RPC service.
      - `PROTOCOL_STATE_CONTRACT`: The contract address for the protocol state.
@@ -87,7 +93,7 @@ Building your own use case is easy. Just follow the steps below:
 4. Open a screen by typing `screen` and then follow instructions by running (if you're not using a server, you can skip starting a screen session)
 
 
-    `./build-dev.sh`
+    `./build.sh`
 
     If the `.env` is filled up correctly, all services will execute one by one. The logs do fill up quick. So, remember to [safely detach](https://linuxize.com/post/how-to-use-linux-screen/) from screen when not using it. 
 
