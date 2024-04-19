@@ -84,6 +84,7 @@ Building your own use case is easy. Just follow the steps below:
      - `IPFS_API_KEY`: The API key for the IPFS service (if required).
      - `IPFS_API_SECRET`: The API secret for the IPFS service (if required).
      - `SLACK_REPORTING_URL`: The URL for reporting to Slack.
+     - `BATCH_SUBMISSION_LIMIT`: The max blocks upto which batch submissions are accepted.
      - `WEB3_STORAGE_TOKEN`: The token for Web3.Storage. You can generate or retrieve this token from your [API tokens page](https://web3.storage/tokens/?create=true) after signing up for a free plan at web3.storage.
 
 3. Setup codebase by running `bootstrap.sh` using `./bootstrap.sh` command.
