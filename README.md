@@ -29,7 +29,8 @@ Clone the repository against the testnet branch.
      - `SIGNER_ACCOUNT_PRIVATE_KEY`: The private key corresponding to the signer account address.
      - `SEQUENCER_ID`: The peer ID of the snapshot sequencer which is where all snapshots are submitted.
      - `RENDEZVOUS_POINT`: The identifier for locating all relayer peers which are the only way to access the sequencer and submit snapshots.
-
+     - `IPFS_URL`: The URL for the IPFS (InterPlanetary File System) service in HTTP(s) (e.g. `https://ipfs.infura.io:5001`) multiaddr format (e.g. `/dns4/ipfs.infura.io/tcp/5001/https`), this will be accessed by both the validator and the sequencer
+   
    - Optionally, you may also set the following variables:
      - `PROST_RPC_URL`: The URL for the PROST RPC service.
      - `PROTOCOL_STATE_CONTRACT`: The contract address for the protocol state.
@@ -37,7 +38,6 @@ Clone the repository against the testnet branch.
      - `NAMESPACE`: The unique key used to identify your project namespace around which all consensus activity takes place.
      - `POWERLOOM_REPORTING_URL`: The URL for reporting to PowerLoom.
      - `PROST_CHAIN_ID`: The chain ID for the PROST RPC service.
-     - `IPFS_URL`: The URL for the IPFS (InterPlanetary File System) service in HTTP(s) (e.g. `https://ipfs.infura.io:5001`) multiaddr format (e.g. `/dns4/ipfs.infura.io/tcp/5001/https`)
      - `IPFS_API_KEY`: The API key for the IPFS service (if required).
      - `IPFS_API_SECRET`: The API secret for the IPFS service (if required).
      - `SLACK_REPORTING_URL`: The URL for reporting to Slack.
@@ -72,6 +72,8 @@ Building your own use case is easy. Just follow the steps below:
      - Configure `SNAPSHOTTER_COMPUTE_REPO` and `SNAPSHOTTER_COMPUTE_REPO_BRANCH` to point to your forked snapshotter-computes repository.
      - `SEQUENCER_ID`: The peer ID of the snapshot sequencer which is where all snapshots are submitted.
      - `RENDEZVOUS_POINT`: The identifier for locating all relayer peers which are the only way to access the sequencer and submit snapshots.
+     - `IPFS_URL`: The URL for the IPFS (InterPlanetary File System) service in HTTP(s) (e.g. `https://ipfs.infura.io:5001`) multiaddr format (e.g. `/dns4/ipfs.infura.io/tcp/5001/https`), this will be accessed by both the validator and the sequencer
+
 
    - Optionally, you may also set the following variables:
      - `PROST_RPC_URL`: The URL for the PROST RPC service.
@@ -80,7 +82,6 @@ Building your own use case is easy. Just follow the steps below:
      - `NAMESPACE`: The unique key used to identify your project namespace around which all consensus activity takes place.
      - `POWERLOOM_REPORTING_URL`: The URL for reporting to PowerLoom.
      - `PROST_CHAIN_ID`: The chain ID for the PROST RPC service.
-     - `IPFS_URL`: The URL for the IPFS (InterPlanetary File System) service in HTTP(s) (e.g. `https://ipfs.infura.io:5001`) multiaddr format (e.g. `/dns4/ipfs.infura.io/tcp/5001/https`)
      - `IPFS_API_KEY`: The API key for the IPFS service (if required).
      - `IPFS_API_SECRET`: The API secret for the IPFS service (if required).
      - `SLACK_REPORTING_URL`: The URL for reporting to Slack.
