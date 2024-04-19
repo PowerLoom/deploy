@@ -114,18 +114,12 @@ Building your own use case is easy. Just follow the steps below:
 
 ```
     # docker ps
-
-    CONTAINER ID   IMAGE                      COMMAND                  CREATED              STATUS                        PORTS                                                                                                         NAMES
-
-    cbeed6b78b1c   powerloom-pooler           "bash -c 'sh snapsho…"   About a minute ago   Up 49 seconds (healthy)       0.0.0.0:8002->8002/tcp, 0.0.0.0:8555->8555/tcp                                                                powerloom_deploy-pooler-1
-
-    39773c029247   powerloom-audit-protocol   "bash -c 'sh snapsho…"   About a minute ago   Up About a minute (healthy)   0.0.0.0:9000->9000/tcp, 0.0.0.0:9002->9002/tcp, 0.0.0.0:9030->9030/tcp                                        powerloom_deploy-audit-protocol-1
-
-    a8e7413cf980   rabbitmq:3-management      "docker-entrypoint.s…"   About a minute ago   Up About a minute (healthy)   4369/tcp, 5671/tcp, 0.0.0.0:5672->5672/tcp, 15671/tcp, 15691-15692/tcp, 25672/tcp, 0.0.0.0:15672->15672/tcp   powerloom_deploy-rabbitmq-1
-
-    48c241b1c926   ipfs/kubo:release          "/bin/sh -c ' echo '…"   About a minute ago   Up About a minute (healthy)   4001/tcp, 8080-8081/tcp, 4001/udp, 0.0.0.0:5001->5001/tcp                                                     powerloom_deploy-ipfs-1
-
-    64e2213cdcb3   redis:alpine               "docker-entrypoint.s…"   About a minute ago   Up About a minute (healthy)   0.0.0.0:6379->6379/tcp                                                                                        powerloom_deploy-redis-1
+        CONTAINER ID  IMAGE              COMMAND         CREATED     STATUS              PORTS                                                                         NAMES
+        1c20cce8212d  proto-snapshot-server      "bash -c 'sh server_…"  5 seconds ago  Up 4 seconds           0.0.0.0:50051->50051/tcp, :::50051->50051/tcp                                                     powerloom_deploy_snapshot-server_1
+        3d7c59ded89d  ipfs/kubo:release        "/bin/sh -c ' echo '…"  5 seconds ago  Up 4 seconds (health: starting)  4001/tcp, 8080-8081/tcp, 4001/udp, 0.0.0.0:5001->5001/tcp, :::5001->5001/tcp                                     powerloom_deploy_ipfs_1
+        5000d9e89887  rabbitmq:3-management      "docker-entrypoint.s…"  5 seconds ago  Up 4 seconds (health: starting)  4369/tcp, 5671/tcp, 0.0.0.0:5672->5672/tcp, :::5672->5672/tcp, 15671/tcp, 15691-15692/tcp, 25672/tcp, 0.0.0.0:15672->15672/tcp, :::15672->15672/tcp  powerloom_deploy_rabbitmq_1
+        5e67a1a05b75  powerloom-submission-validator  "bash -c 'sh validat…"  5 seconds ago  Up 4 seconds                                                                                      powerloom_deploy_snapshot-validator_1
+        974f3482e08f  redis:alpine           "docker-entrypoint.s…"  5 seconds ago  Up 4 seconds (health: starting)  0.0.0.0:6379->6379/tcp, :::6379->6379/tcp                                                       powerloom_deploy_redis_1
 ```
 
 3. To be sure whether your snapshotter is processing epochs and submitting snapshots for consensus, run the following internal API query on Pooler Core API from your browser.
