@@ -52,9 +52,11 @@ Building your own use case is easy. Just follow the steps below:
    
    **Note**- This is a one time step and resets the codebase to the latest version of the branch. If you have made any changes to the codebase, make sure to commit them before running this command.You need to run this command only once after cloning the repository.
 
-4. Install required dependencies for python scripts by running `pip install -r requirements.txt` command.
+4. Setup an new environment by running : `virtualenv powerloom` & `source powerloom/bin/activate`
 
-5. Open a screen by typing `screen` and then follow instructions by running (if you're not using a server, you can skip starting a screen session)
+5. Install required dependencies for python scripts by running `pip install -r requirements.txt` command.
+
+6. Open a screen by typing `screen` and then follow instructions by running (if you're not using a server, you can skip starting a screen session)
 
 
     `./build.sh`
