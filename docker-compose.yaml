@@ -44,7 +44,7 @@ services:
       bash -c "sh snapshotter_autofill.sh && sh init_processes.sh"
 
   pooler:
-    image: ghcr.io/powerloom/pooler:latest
+    image: ghcr.io/powerloom/pooler:base_uniswapv2_direct_submissions
     depends_on:
       audit-protocol:
         condition: service_healthy
