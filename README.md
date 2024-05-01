@@ -10,8 +10,8 @@ Scripts to deploy PowerLoom services ([audit-protocol](https://github.com/PowerL
 3. IPFS node
     - While we have __included__ a node in our autobuild docker setup, IPFS daemon can hog __*a lot*__ of resources - it is not recommended to run this on a personal computer unless you have a strong internet connection and dedicated CPU+RAM.
     - 3rd party IPFS services that provide default IFPS interface like Infura are now supported.
-4. RPC URL for `Ethereum mainnet`. We recommend running a full geth node to save costs and to stick to ethos of decentralization! :)
-> Our default (lite mode) setup is designed to work well with a free plan on any of the RPC providers like [Alchemy](https://alchemy.com/?r=15ce6db6d0a109d5), [Infura](https://infura.io), [Quicknode](https://www.quicknode.com?tap_a=67226-09396e&tap_s=3491854-f4a458), etc. It even works with Ankr's [public endpoint](https://rpc.ankr.com/eth) but we recommend signing up to track usage. For those interested in exploring the the full setup, we can also arrange for a special pan through our partners such as BlockVigil.
+4. RPC URL for `Base mainnet`. We recommend running a full geth node to save costs and to stick to ethos of decentralization! :)
+> Our default (lite mode) setup is designed to work well with a free plan on any of the RPC providers like [Alchemy](https://alchemy.com/?r=15ce6db6d0a109d5), [Infura](https://infura.io), [Quicknode](https://www.quicknode.com?tap_a=67226-09396e&tap_s=3491854-f4a458), etc. It even works with Ankr's [public endpoint](https://rpc.ankr.com/base) but we recommend signing up to track usage. For those interested in exploring the the full setup, we can also arrange for a special pan through our partners such as BlockVigil.
 
 ## For snapshotters
 
@@ -35,8 +35,8 @@ Scripts to deploy PowerLoom services ([audit-protocol](https://github.com/PowerL
 
     `./build.sh`
 
-3. Once all the services are up and running, the front-end can be accessed via [Pooler Frontend](http://localhost:3000) to see a UNISWAPV2 summary data dashboard similar to [PowerLoom UNISWAPV2 Prod](https://uniswapv2.powerloom.io/).
-    - A sample screenshot of the dashboard is given [here](./sample_images/pooler-frontend.jpg)
+3. Once all the services are up and running, the front-end can be accessed via [Pooler Frontend](http://localhost:3000) to see a BASE UNISWAPV2 summary data dashboard similar to [PowerLoom BASE UNISWAPV2 Prod](https://uniswapv2-base.powerloom.io/).
+    - A sample screenshot of the dashboard is given [here](./sample_images/basev2-frontend.jpg)
 
     - This will also give an idea in case your snapshotting has fallen behind as you can notice from the time of last snapshot shown in the screenshot.
 
