@@ -1,3 +1,4 @@
+#!/bin/bash
 source .env
 
 echo "testing before build...";
@@ -13,7 +14,7 @@ if [ -z "$SIGNER_ACCOUNT_ADDRESS" ]; then
 fi
 
 if [ -z "$SIGNER_ACCOUNT_PRIVATE_KEY" ]; then
-    echo "SIGNER_ACCOUNT_ADDRESS not found, please set this in your .env!";
+    echo "SIGNER_ACCOUNT_PRIVATE_KEY not found, please set this in your .env!";
     exit 1;
 fi
 
@@ -53,20 +54,26 @@ if [ "$POWERLOOM_REPORTING_URL" ]; then
     echo "Found SLACK_REPORTING_URL ${POWERLOOM_REPORTING_URL}";
 fi
 
-#Make sure the repos mentioned in comments are cloned in this repo
-
-#cd ../ && git clone https://github.com/PowerLoom/audit-protocol.git;
 cd audit-protocol/ && ./build-docker.sh;
 
-#cd ../ && git clone https://github.com/PowerLoom/pooler.git;
 cd ../pooler/ && ./build-docker.sh;
 
 cd ../;
 
-# Use this for local IPFS node
-docker-compose -f docker-compose-dev.yaml --profile ipfs up -V --abort-on-container-exit
-# Use this if you're using external IPFS node
-#docker-compose -f docker-compose-dev.yaml up -V --abort-on-container-exit
 
-#Reset command:
-#docker-compose -f docker-compose-dev.yaml --profile ipfs down --volumes
+echo "building...";
+
+if ! [ -x "$(command -v docker-compose)" ]; then
+    echo 'docker compose not found, trying to see if compose exists within docker';
+    if [ -z "$IPFS_URL" ]; then
+        docker compose -f docker-compose-dev.yaml --profile ipfs up -V --abort-on-container-exit
+    else
+        docker compose -f docker-compose-dev.yaml up --no-deps -V --abort-on-container-exit
+    fi
+else
+    if [ -z "$IPFS_URL" ]; then
+        docker-compose -f docker-compose-dev.yaml --profile ipfs up -V --abort-on-container-exit
+    else
+        docker-compose -f docker-compose-dev.yaml up --no-deps -V --abort-on-container-exit
+    fi
+fi
