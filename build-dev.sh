@@ -18,11 +18,6 @@ if [ -z "$SIGNER_ACCOUNT_PRIVATE_KEY" ]; then
     exit 1;
 fi
 
-if [ -z "$RENDEZVOUS_POINT" ]; then
-    echo "RENDEZVOUS_POINT not found, please set this in your .env!";
-    exit 1;
-fi
-
 if [ -z "$SEQUENCER_ID" ]; then
     echo "SEQUENCER_ID not found, please set this in your .env!";
     exit 1;
@@ -69,7 +64,7 @@ cd audit-protocol/ && ./build-docker.sh;
 cd ../pooler/ && ./build-docker.sh;
 
 cd ../submission-sequencer/ && chmod +x build-docker.sh && ./build-docker.sh;
-cd ../validator-alpha/ && chmod +x build-docker.sh && ./build-docker.sh;
+# cd ../validator-alpha/ && chmod +x build-docker.sh && ./build-docker.sh;
 cd ../;
 
 
