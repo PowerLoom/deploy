@@ -107,7 +107,6 @@ services:
       - SLACK_REPORTING_URL=$SLACK_REPORTING_URL
       - POWERLOOM_REPORTING_URL=$POWERLOOM_REPORTING_URL
       - WEB3_STORAGE_TOKEN=$WEB3_STORAGE_TOKEN
-      - SLOT_ID=$SLOT_ID  
       - NAMESPACE=$NAMESPACE
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8002/health"]
