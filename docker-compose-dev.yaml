@@ -1,8 +1,8 @@
 version: '3.9'
 
 services:
-  snapshot-server:
-    image: proto-snapshot-server
+  snapshotter-lite-local-collector:
+    image: snapshotter-lite-local-collector
     expose:
       - 50051
     ports:
@@ -107,6 +107,7 @@ services:
       - SLACK_REPORTING_URL=$SLACK_REPORTING_URL
       - POWERLOOM_REPORTING_URL=$POWERLOOM_REPORTING_URL
       - WEB3_STORAGE_TOKEN=$WEB3_STORAGE_TOKEN
+      - SLOT_ID=$SLOT_ID  
       - NAMESPACE=$NAMESPACE
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8002/health"]

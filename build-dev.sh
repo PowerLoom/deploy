@@ -63,8 +63,7 @@ cd audit-protocol/ && ./build-docker.sh;
 
 cd ../pooler/ && ./build-docker.sh;
 
-cd ../submission-sequencer/ && chmod +x build-docker.sh && ./build-docker.sh;
-# cd ../validator-alpha/ && chmod +x build-docker.sh && ./build-docker.sh;
+cd ../snapshotter-lite-local-collector/ && chmod +x build-docker.sh && ./build-docker.sh;
 cd ../;
 
 

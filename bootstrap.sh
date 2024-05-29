@@ -8,10 +8,10 @@ rm -rf logs/audit-protocol/*;
 
 echo "setting up codebase...";
 
-rm -rf submission-sequencer;
-git clone https://github.com/PowerLoom/submission-sequencer.git;
-cd ./submission-sequencer;
-git checkout no_dashboard;
+rm -rf snapshotter-lite-local-collector;
+git clone https://github.com/PowerLoom/snapshotter-lite-local-collector.git;
+cd ./snapshotter-lite-local-collector;
+git checkout simulation_node_bi;
 cd ..;
 
 git clone https://github.com/PowerLoom/audit-protocol.git;
