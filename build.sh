@@ -70,9 +70,9 @@ cd pooler/ && ./build-docker.sh;
 
 cd ../;
 
-echo "handling burner assignment...";
+echo "~~~ Please ensure your burner address is set on devnet-mint.powerloom.dev ~~~";
 
-python3 assign_burner.py || exit 1;
+#python3 assign_burner.py || exit 1;
 
 echo "building...";
 
